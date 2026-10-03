@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareerAI | AI-Based Career Guidance System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:#fff;
+    line-height:1.6;
+}
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:18px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(7,17,31,.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    font-size:27px;
+    font-weight:900;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#c8d7e6;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:#6ee7ff;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 17px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:14px;
+}
+
+.btn-outline{
+    border:1px solid #36506b;
+    color:#dce9f5;
+}
+
+.btn-primary{
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    color:#06101b;
+}
+
+.hero{
+    min-height:100vh;
+    padding:150px 7% 80px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(110,231,255,.08);
+    border-radius:50%;
+    filter:blur(80px);
+    top:-150px;
+    right:-100px;
+}
+
+.hero-content{
+    max-width:760px;
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:20px;
+    background:rgba(110,231,255,.08);
+    border:1px solid rgba(110,231,255,.2);
+    color:#8deaff;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(42px,7vw,76px);
+    line-height:1.05;
+    margin-bottom:22px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:#aebfd0;
+    font-size:18px;
+    max-width:650px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.hero-btn{
+    padding:14px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.primary{
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    color:#06101b;
+}
+
+.secondary{
+    border:1px solid #36506b;
+    color:#dce9f5;
+}
+
+section{
+    padding:90px 7%;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-heading h2{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.section-heading p{
+    color:#9fb0c3;
+    max-width:650px;
+    margin:auto;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:rgba(15,30,50,.85);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:28px;
+    transition:.25s;
+}
+
+.feature:hover{
+    transform:translateY(-6px);
+    border-color:rgba(110,231,255,.3);
+}
+
+.icon{
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:rgba(110,231,255,.08);
+    font-size:24px;
+    margin-bottom:18px;
+}
+
+.feature h3{
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:#9fb0c3;
+    font-size:14px;
+}
+
+.careers{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.career{
+    padding:25px 18px;
+    text-align:center;
+    background:#0d1d30;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+}
+
+.career h3{
+    margin-bottom:7px;
+}
+
+.career p{
+    color:#8fa3b8;
+    font-size:13px;
+}
+
+.about{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+.about p{
+    color:#aebfd0;
+    line-height:1.9;
+}
+
+.cta{
+    text-align:center;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(110,231,255,.08),
+            rgba(56,239,125,.06)
+        );
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.cta h2{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.cta p{
+    color:#9fb0c3;
+    margin-bottom:25px;
+}
+
+footer{
+    padding:30px 7%;
+    text-align:center;
+    color:#71869b;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+
+    .features{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .careers{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:16px 5%;
+    }
+
+    .nav-buttons .btn-outline{
+        display:none;
+    }
+
+    .hero{
+        padding:130px 6% 70px;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    section{
+        padding:70px 6%;
+    }
+
+    .features,
+    .careers{
+        grid-template-columns:1fr;
+    }
+
+    .section-heading h2,
+    .cta h2{
+        font-size:30px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        CareerAI
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="#home">Home</a>
+        </li>
+
+        <li>
+            <a href="#features">Features</a>
+        </li>
+
+        <li>
+            <a href="#careers">Careers</a>
+        </li>
+
+        <li>
+            <a href="#about">About</a>
+        </li>
+
+    </ul>
+
+    <div class="nav-buttons">
+
+        <a
+            class="btn btn-outline"
+            href="login.html">
+            Login
+        </a>
+
+        <a
+            class="btn btn-primary"
+            href="register.html">
+            Get Started
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="badge">
+            AI-Based Career Guidance System
+        </span>
+
+        <h1>
+            Discover the
+            <span class="gradient-text">
+                career
+            </span>
+            that's right for you.
+        </h1>
+
+        <p>
+            CareerAI helps students understand their
+            strengths, interests and academic performance
+            to explore suitable career paths and build a
+            clear roadmap for the future.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                class="hero-btn primary"
+                href="register.html">
+                Start Your Journey
+            </a>
+
+            <a
+                class="hero-btn secondary"
+                href="#features">
+                Explore Features
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="features">
+
+    <div class="section-heading">
+
+        <h2>
+            Everything You Need
+        </h2>
+
+        <p>
+            A simple career guidance platform designed
+            to help students make informed career choices.
+        </p>
+
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="icon">
+                🧠
+            </div>
+
+            <h3>
+                Skills Assessment
+            </h3>
+
+            <p>
+                Evaluate your interests, abilities and
+                strengths through a structured assessment.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Career Recommendations
+            </h3>
+
+            <p>
+                Receive career recommendations based on
+                your assessment results and academic profile.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="icon">
+                🗺️
+            </div>
+
+            <h3>
+                Career Roadmap
+            </h3>
+
+            <p>
+                Follow a structured learning path with
+                recommended skills and development steps.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="icon">
+                👤
+            </div>
+
+            <h3>
+                Student Profile
+            </h3>
+
+            <p>
+                Manage your academic information and
+                keep your career guidance results organized.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h3>
+                Academic Analysis
+            </h3>
+
+            <p>
+                Include academic performance as part of
+                your overall career profile.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="icon">
+                🔐
+            </div>
+
+            <h3>
+                Simple Account System
+            </h3>
+
+            <p>
+                Register and login to access your
+                personalized CareerAI dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="careers">
+
+    <div class="section-heading">
+
+        <h2>
+            Explore Career Paths
+        </h2>
+
+        <p>
+            CareerAI can help you explore several
+            technology-focused career directions.
+        </p>
+
+    </div>
+
+    <div class="careers">
+
+        <div class="career">
+
+            <h3>
+                💻 Software Developer
+            </h3>
+
+            <p>
+                Build applications and software solutions.
+            </p>
+
+        </div>
+
+        <div class="career">
+
+            <h3>
+                📊 Data Analyst
+            </h3>
+
+            <p>
+                Analyze data and discover useful insights.
+            </p>
+
+        </div>
+
+        <div class="career">
+
+            <h3>
+                🛡️ Cyber Security
+            </h3>
+
+            <p>
+                Protect systems, networks and information.
+            </p>
+
+        </div>
+
+        <div class="career">
+
+            <h3>
+                🎨 UI/UX Designer
+            </h3>
+
+            <p>
+                Design useful and engaging digital experiences.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="about">
+
+    <div class="about">
+
+        <div class="section-heading">
+
+            <h2>
+                About CareerAI
+            </h2>
+
+        </div>
+
+        <p>
+            CareerAI is an AI-based career guidance system
+            designed to assist students in exploring
+            suitable career opportunities. The system
+            considers factors such as skills, interests
+            and academic performance to provide structured
+            career guidance.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="cta">
+
+    <h2>
+        Ready to explore your future?
+    </h2>
+
+    <p>
+        Create your CareerAI profile and begin your
+        personalized career assessment.
+    </p>
+
+    <a
+        class="hero-btn primary"
+        href="register.html">
+        Create Your Profile
+    </a>
+
+</section>
+
+
+<footer>
+
+    © 2026 CareerAI —
+    AI-Based Career Guidance System
+
+</footer>
+
+
+<script>
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(function(link){
+
+    link.addEventListener(
+        "click",
+        function(event){
+
+            const target =
+                document.querySelector(
+                    this.getAttribute("href")
+                );
+
+            if(target){
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            }
+
+        }
+    );
+
+});
+
+window.addEventListener(
+    "scroll",
+    function(){
+
+        const navbar =
+            document.querySelector(".navbar");
+
+        if(window.scrollY > 30){
+
+            navbar.style.boxShadow =
+                "0 10px 30px rgba(0,0,0,.25)";
+
+        }else{
+
+            navbar.style.boxShadow = "none";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
