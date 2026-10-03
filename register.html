@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | CareerAI</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,sans-serif;
+    background:
+        radial-gradient(circle at top right,#12345a,transparent 40%),
+        #07111f;
+    color:#fff;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:480px;
+    background:rgba(15,30,50,.92);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+.logo{
+    text-align:center;
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:8px;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    text-align:center;
+    color:#9fb0c3;
+    margin-bottom:28px;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+label{
+    display:block;
+    margin-bottom:7px;
+    color:#dbe7f3;
+    font-size:14px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border-radius:10px;
+    border:1px solid #29415c;
+    background:#0b1929;
+    color:#fff;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus,select:focus{
+    border-color:#6ee7ff;
+    box-shadow:0 0 0 3px rgba(110,231,255,.08);
+}
+
+select option{
+    background:#0b1929;
+    color:#fff;
+}
+
+button{
+    width:100%;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    color:#06101b;
+    font-weight:800;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.message{
+    display:none;
+    margin-top:18px;
+    padding:12px;
+    border-radius:10px;
+    text-align:center;
+    font-size:14px;
+}
+
+.success{
+    display:block;
+    background:rgba(56,239,125,.12);
+    border:1px solid rgba(56,239,125,.3);
+    color:#7ff0a5;
+}
+
+.error{
+    display:block;
+    background:rgba(255,80,80,.12);
+    border:1px solid rgba(255,80,80,.3);
+    color:#ff9696;
+}
+
+.links{
+    text-align:center;
+    margin-top:20px;
+    color:#9fb0c3;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.links a{
+    color:#6ee7ff;
+    text-decoration:none;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">CareerAI</div>
+
+    <p class="subtitle">
+        Create your account and start your career journey
+    </p>
+
+    <form id="registerForm">
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="course">Course</label>
+            <input
+                type="text"
+                id="course"
+                placeholder="e.g. BCA, B.Tech, MCA"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="academicPercentage">
+                Academic Percentage
+            </label>
+            <input
+                type="number"
+                id="academicPercentage"
+                placeholder="Enter your percentage"
+                min="0"
+                max="100"
+                step="0.01"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">
+                Confirm Password
+            </label>
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+            >
+        </div>
+
+        <button type="submit" id="registerButton">
+            Create Account
+        </button>
+
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <div class="links">
+        Already have an account?
+        <a href="login.html">Login</a>
+
+        <br>
+
+        <a href="../index.html">Back to Home</a>
+    </div>
+
+</div>
+
+<script>
+const form = document.getElementById("registerForm");
+const button = document.getElementById("registerButton");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    message.className = "message";
+    message.textContent = "";
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const course =
+        document.getElementById("course").value.trim();
+
+    const academicPercentage =
+        parseFloat(
+            document.getElementById("academicPercentage").value
+        );
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    if(password !== confirmPassword){
+
+        message.className = "message error";
+        message.textContent = "Passwords do not match.";
+        return;
+    }
+
+    if(
+        isNaN(academicPercentage) ||
+        academicPercentage < 0 ||
+        academicPercentage > 100
+    ){
+
+        message.className = "message error";
+        message.textContent =
+            "Please enter a percentage between 0 and 100.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Creating Account...";
+
+    try{
+
+        const response = await fetch(
+            "https://careerai-r4qf.onrender.com/api/students/register",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    name:name,
+                    email:email,
+                    password:password,
+                    course:course,
+                    academicPercentage:academicPercentage
+                })
+            }
+        );
+
+        if(!response.ok){
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                errorText || "Registration failed."
+            );
+        }
+
+        const student =
+            await response.json();
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            "Registration successful! Your Student ID is " +
+            student.id;
+
+        form.reset();
+
+    }catch(error){
+
+        message.className =
+            "message error";
+
+        if(error.message === "Failed to fetch"){
+
+            message.textContent =
+                "Unable to connect to CareerAI server. Please try again.";
+
+        }else{
+
+            message.textContent =
+                "Registration failed. Please try again.";
+
+        }
+
+        console.error(error);
+
+    }finally{
+
+        button.disabled = false;
+        button.textContent = "Create Account";
+    }
+
+});
+</script>
+
+</body>
+</html>
+
+After pasting:
+
+Ctrl + O → Enter → Ctrl + X
+
+Then tell me Done.
