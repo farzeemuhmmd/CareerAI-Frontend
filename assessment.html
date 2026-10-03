@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Assessment | CareerAI</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:
+        radial-gradient(circle at top right,#12345a,transparent 40%),
+        #07111f;
+    color:#fff;
+    min-height:100vh;
+}
+
+.navbar{
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(7,17,31,.8);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.back{
+    color:#6ee7ff;
+    text-decoration:none;
+}
+
+.container{
+    width:92%;
+    max-width:850px;
+    margin:40px auto;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.header p{
+    color:#9fb0c3;
+    line-height:1.6;
+}
+
+.progress{
+    height:7px;
+    background:#16283c;
+    border-radius:10px;
+    margin:20px 0 30px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:20%;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    transition:.3s;
+}
+
+.question-card{
+    background:rgba(15,30,50,.92);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:28px;
+}
+
+.question-number{
+    color:#6ee7ff;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.question{
+    font-size:23px;
+    line-height:1.4;
+    margin-bottom:24px;
+}
+
+.options{
+    display:grid;
+    gap:12px;
+}
+
+.option{
+    padding:16px;
+    border-radius:11px;
+    border:1px solid #29415c;
+    background:#0b1929;
+    cursor:pointer;
+    transition:.2s;
+    color:#dce9f5;
+}
+
+.option:hover{
+    border-color:#6ee7ff;
+    transform:translateY(-1px);
+}
+
+.option.selected{
+    border-color:#6ee7ff;
+    background:rgba(110,231,255,.1);
+}
+
+.buttons{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:22px;
+}
+
+button{
+    border:none;
+    padding:13px 22px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.prev{
+    background:#17283b;
+    color:#dce9f5;
+}
+
+.next{
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    color:#06101b;
+}
+
+button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.result{
+    display:none;
+    text-align:center;
+}
+
+.result h2{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.result-career{
+    font-size:27px;
+    font-weight:800;
+    color:#6ee7ff;
+    margin:15px 0;
+}
+
+.result p{
+    color:#b7c7d8;
+    line-height:1.7;
+}
+
+.score{
+    margin:20px 0;
+    font-size:22px;
+    font-weight:700;
+}
+
+@media(max-width:600px){
+    .header h1{
+        font-size:28px;
+    }
+
+    .question{
+        font-size:20px;
+    }
+
+    .question-card{
+        padding:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">CareerAI</div>
+    <a class="back" href="dashboard.html">Dashboard</a>
+</nav>
+
+<main class="container">
+
+    <div class="header">
+        <h1>Career Assessment</h1>
+        <p>
+            Answer the questions honestly to receive a
+            personalized career recommendation.
+        </p>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <div class="question-card" id="questionCard">
+
+        <div class="question-number" id="questionNumber">
+            Question 1 of 5
+        </div>
+
+        <div class="question" id="question"></div>
+
+        <div class="options" id="options"></div>
+
+        <div class="buttons">
+
+            <button
+                class="prev"
+                id="prevButton"
+                onclick="previousQuestion()"
+                disabled>
+                Previous
+            </button>
+
+            <button
+                class="next"
+                id="nextButton"
+                onclick="nextQuestion()">
+                Next
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="question-card result" id="result">
+
+        <h2>Assessment Complete 🎉</h2>
+
+        <p>Your recommended career is:</p>
+
+        <div class="result-career" id="resultCareer"></div>
+
+        <div class="score" id="resultScore"></div>
+
+        <p id="resultDescription"></p>
+
+        <div class="buttons">
+            <button
+                class="next"
+                onclick="window.location.href='recommendations.html'">
+                View Recommendations
+            </button>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+const questions = [
+
+    {
+        question:"Which activity interests you the most?",
+        options:[
+            {text:"Building websites or applications",career:"Software Developer"},
+            {text:"Analyzing numbers and finding patterns",career:"Data Analyst"},
+            {text:"Protecting systems and networks",career:"Cyber Security Specialist"},
+            {text:"Designing attractive interfaces",career:"UI/UX Designer"}
+        ]
+    },
+
+    {
+        question:"Which skill do you enjoy using most?",
+        options:[
+            {text:"Programming and logical thinking",career:"Software Developer"},
+            {text:"Mathematics and data analysis",career:"Data Analyst"},
+            {text:"Problem solving and security",career:"Cyber Security Specialist"},
+            {text:"Creativity and visual design",career:"UI/UX Designer"}
+        ]
+    },
+
+    {
+        question:"What type of problem do you prefer solving?",
+        options:[
+            {text:"Technical problems using code",career:"Software Developer"},
+            {text:"Problems involving data and statistics",career:"Data Analyst"},
+            {text:"Security threats and vulnerabilities",career:"Cyber Security Specialist"},
+            {text:"User experience and design problems",career:"UI/UX Designer"}
+        ]
+    },
+
+    {
+        question:"Which work environment sounds most interesting?",
+        options:[
+            {text:"Software development team",career:"Software Developer"},
+            {text:"Business intelligence team",career:"Data Analyst"},
+            {text:"Security operations team",career:"Cyber Security Specialist"},
+            {text:"Creative design team",career:"UI/UX Designer"}
+        ]
+    },
+
+    {
+        question:"What is your strongest personal quality?",
+        options:[
+            {text:"Logical and systematic thinking",career:"Software Developer"},
+            {text:"Analytical and detail-oriented thinking",career:"Data Analyst"},
+            {text:"Alertness and problem solving",career:"Cyber Security Specialist"},
+            {text:"Creativity and empathy",career:"UI/UX Designer"}
+        ]
+    }
+
+];
+
+let currentQuestion = 0;
+let answers = [];
+
+const questionElement =
+    document.getElementById("question");
+
+const optionsElement =
+    document.getElementById("options");
+
+const questionNumberElement =
+    document.getElementById("questionNumber");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const prevButton =
+    document.getElementById("prevButton");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+
+function showQuestion(){
+
+    const current =
+        questions[currentQuestion];
+
+    questionNumberElement.textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+    questionElement.textContent =
+        current.question;
+
+    optionsElement.innerHTML = "";
+
+    current.options.forEach(function(option,index){
+
+        const div =
+            document.createElement("div");
+
+        div.className = "option";
+
+        div.textContent =
+            option.text;
+
+        if(
+            answers[currentQuestion] &&
+            answers[currentQuestion].index === index
+        ){
+            div.classList.add("selected");
+        }
+
+        div.onclick = function(){
+
+            answers[currentQuestion] = {
+                index:index,
+                career:option.career
+            };
+
+            showQuestion();
+
+        };
+
+        optionsElement.appendChild(div);
+
+    });
+
+    prevButton.disabled =
+        currentQuestion === 0;
+
+    nextButton.textContent =
+        currentQuestion === questions.length - 1
+        ? "Finish Assessment"
+        : "Next";
+
+    progressBar.style.width =
+        ((currentQuestion + 1) /
+        questions.length * 100) + "%";
+}
+
+
+function nextQuestion(){
+
+    if(!answers[currentQuestion]){
+
+        alert("Please select an option.");
+        return;
+
+    }
+
+    if(currentQuestion < questions.length - 1){
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }else{
+
+        finishAssessment();
+
+    }
+}
+
+
+function previousQuestion(){
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        showQuestion();
+
+    }
+}
+
+
+function finishAssessment(){
+
+    const scores = {};
+
+    answers.forEach(function(answer){
+
+        scores[answer.career] =
+            (scores[answer.career] || 0) + 1;
+
+    });
+
+    let recommendedCareer =
+        "Software Developer";
+
+    let highestScore = 0;
+
+    Object.keys(scores).forEach(function(career){
+
+        if(scores[career] > highestScore){
+
+            highestScore =
+                scores[career];
+
+            recommendedCareer =
+                career;
+        }
+
+    });
+
+    const score =
+        Math.round(
+            highestScore /
+            questions.length *
+            100
+        );
+
+    const descriptions = {
+
+        "Software Developer":
+            "A career focused on designing, developing and maintaining software applications using programming and logical problem solving.",
+
+        "Data Analyst":
+            "A career focused on analyzing data, identifying patterns and supporting decisions using statistics and analytical tools.",
+
+        "Cyber Security Specialist":
+            "A career focused on protecting systems, networks and information from security threats and vulnerabilities.",
+
+        "UI/UX Designer":
+            "A career focused on creating useful, accessible and visually engaging digital experiences for users."
+    };
+
+    const skills = {
+
+        "Software Developer":
+            ["Java","Programming","Problem Solving","Web Development"],
+
+        "Data Analyst":
+            ["Python","Excel","SQL","Data Analysis"],
+
+        "Cyber Security Specialist":
+            ["Networking","Linux","Security","Risk Analysis"],
+
+        "UI/UX Designer":
+            ["Figma","Wireframing","Prototyping","User Research"]
+    };
+
+    const assessment = {
+
+        career:recommendedCareer,
+
+        score:score,
+
+        description:
+            descriptions[recommendedCareer],
+
+        skills:
+            skills[recommendedCareer]
+
+    };
+
+    localStorage.setItem(
+        "careerAIAssessment",
+        JSON.stringify(assessment)
+    );
+
+    document.getElementById("questionCard")
+        .style.display = "none";
+
+    document.getElementById("result")
+        .style.display = "block";
+
+    document.getElementById("resultCareer")
+        .textContent = recommendedCareer;
+
+    document.getElementById("resultScore")
+        .textContent =
+            "Match Score: " + score + "%";
+
+    document.getElementById("resultDescription")
+        .textContent =
+            descriptions[recommendedCareer];
+}
+
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
