@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Roadmap | CareerAI</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:
+        radial-gradient(circle at top right,#12345a,transparent 40%),
+        #07111f;
+    color:#fff;
+    min-height:100vh;
+}
+
+.navbar{
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(7,17,31,.8);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.back{
+    color:#6ee7ff;
+    text-decoration:none;
+}
+
+.container{
+    width:92%;
+    max-width:1000px;
+    margin:40px auto;
+}
+
+.header{
+    margin-bottom:28px;
+}
+
+.header h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.header p{
+    color:#9fb0c3;
+    line-height:1.6;
+}
+
+.career-card{
+    background:rgba(15,30,50,.92);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:28px;
+    margin-bottom:28px;
+}
+
+.career{
+    color:#6ee7ff;
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.description{
+    color:#b7c7d8;
+    line-height:1.7;
+}
+
+.roadmap{
+    display:grid;
+    gap:18px;
+}
+
+.step{
+    position:relative;
+    background:rgba(15,30,50,.88);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:24px;
+    display:flex;
+    gap:20px;
+}
+
+.number{
+    min-width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6ee7ff,#38ef7d);
+    color:#06101b;
+    font-weight:800;
+    font-size:18px;
+}
+
+.step h3{
+    margin-bottom:8px;
+    font-size:20px;
+}
+
+.step p{
+    color:#aebfd0;
+    line-height:1.65;
+}
+
+.skills-card{
+    margin-top:28px;
+    background:rgba(15,30,50,.88);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:24px;
+}
+
+.skills-card h2{
+    margin-bottom:16px;
+}
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.skill{
+    padding:9px 13px;
+    border-radius:20px;
+    background:rgba(110,231,255,.08);
+    border:1px solid rgba(110,231,255,.2);
+    color:#bcefff;
+    font-size:13px;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+}
+
+.empty p{
+    color:#9fb0c3;
+    margin:12px 0 20px;
+}
+
+.button{
+    display:inline-block;
+    padding:13px 20px;
+    border-radius:10px;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    color:#06101b;
+    text-decoration:none;
+    font-weight:800;
+}
+
+@media(max-width:600px){
+    .header h1{
+        font-size:28px;
+    }
+
+    .career{
+        font-size:25px;
+    }
+
+    .step{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">CareerAI</div>
+    <a class="back" href="dashboard.html">Dashboard</a>
+</nav>
+
+<main class="container">
+
+    <div class="header">
+        <h1>Career Roadmap</h1>
+        <p>
+            Follow a structured learning path based on your
+            recommended career.
+        </p>
+    </div>
+
+    <div id="content"></div>
+
+</main>
+
+<script>
+
+const assessmentData =
+    localStorage.getItem("careerAIAssessment");
+
+const content =
+    document.getElementById("content");
+
+const roadmaps = {
+
+    "Software Developer":{
+        description:
+            "Build a strong foundation in programming, software development and modern application technologies.",
+
+        steps:[
+            ["Learn Programming",
+             "Master Java fundamentals, object-oriented programming, data structures and algorithms."],
+
+            ["Learn Databases",
+             "Understand SQL, relational databases and how applications store and retrieve information."],
+
+            ["Build Web Applications",
+             "Learn HTML, CSS, JavaScript and backend development concepts."],
+
+            ["Work With Projects",
+             "Create real-world applications and practice Git, debugging and software development workflows."],
+
+            ["Prepare For Careers",
+             "Build a portfolio, improve problem-solving skills and prepare for technical interviews."]
+        ],
+
+        skills:[
+            "Java",
+            "JavaScript",
+            "SQL",
+            "Git",
+            "Data Structures",
+            "Web Development"
+        ]
+    },
+
+    "Data Analyst":{
+        description:
+            "Develop analytical skills and learn how to turn raw data into useful insights.",
+
+        steps:[
+            ["Learn Excel",
+             "Master spreadsheets, formulas, sorting, filtering and basic data analysis."],
+
+            ["Learn SQL",
+             "Practice querying databases and extracting useful information from datasets."],
+
+            ["Learn Python",
+             "Use Python libraries for data cleaning, analysis and automation."],
+
+            ["Learn Visualization",
+             "Create meaningful charts and dashboards using data visualization tools."],
+
+            ["Build Data Projects",
+             "Analyze real datasets and create portfolio projects that demonstrate your skills."]
+        ],
+
+        skills:[
+            "Python",
+            "SQL",
+            "Excel",
+            "Statistics",
+            "Power BI",
+            "Data Visualization"
+        ]
+    },
+
+    "Cyber Security Specialist":{
+        description:
+            "Develop knowledge of networks, operating systems and security practices to protect digital systems.",
+
+        steps:[
+            ["Learn Networking",
+             "Understand IP addresses, protocols, DNS, routing and common network technologies."],
+
+            ["Learn Linux",
+             "Practice Linux commands, permissions, processes and system administration."],
+
+            ["Learn Security Basics",
+             "Study authentication, encryption, vulnerabilities and common cyber threats."],
+
+            ["Practice Security",
+             "Use legal labs and practice environments to understand security testing techniques."],
+
+            ["Build Security Knowledge",
+             "Study security frameworks, incident response and defensive security concepts."]
+        ],
+
+        skills:[
+            "Networking",
+            "Linux",
+            "Cyber Security",
+            "System Administration",
+            "Risk Analysis",
+            "Security Tools"
+        ]
+    },
+
+    "UI/UX Designer":{
+        description:
+            "Develop design skills focused on creating useful, accessible and engaging digital experiences.",
+
+        steps:[
+            ["Learn Design Principles",
+             "Study typography, layout, color, spacing and visual hierarchy."],
+
+            ["Learn Figma",
+             "Practice creating interfaces, components and design systems."],
+
+            ["Learn User Research",
+             "Understand user needs, personas, user journeys and usability testing."],
+
+            ["Create Prototypes",
+             "Build interactive prototypes and test different user experience ideas."],
+
+            ["Build A Portfolio",
+             "Document design projects and explain the decisions behind your work."]
+        ],
+
+        skills:[
+            "Figma",
+            "Wireframing",
+            "Prototyping",
+            "User Research",
+            "Typography",
+            "Visual Design"
+        ]
+    }
+
+};
+
+if(!assessmentData){
+
+    content.innerHTML = `
+        <div class="career-card empty">
+            <h2>Assessment Not Completed</h2>
+            <p>
+                Complete the career assessment first to
+                generate your personalized roadmap.
+            </p>
+            <a class="button" href="assessment.html">
+                Take Assessment
+            </a>
+        </div>
+    `;
+
+}else{
+
+    const assessment =
+        JSON.parse(assessmentData);
+
+    const career =
+        assessment.career ||
+        "Software Developer";
+
+    const roadmap =
+        roadmaps[career] ||
+        roadmaps["Software Developer"];
+
+    let stepsHTML = "";
+
+    roadmap.steps.forEach(function(step,index){
+
+        stepsHTML += `
+            <div class="step">
+
+                <div class="number">
+                    ${index + 1}
+                </div>
+
+                <div>
+                    <h3>${step[0]}</h3>
+                    <p>${step[1]}</p>
+                </div>
+
+            </div>
+        `;
+
+    });
+
+    let skillsHTML = "";
+
+    roadmap.skills.forEach(function(skill){
+
+        skillsHTML += `
+            <span class="skill">${skill}</span>
+        `;
+
+    });
+
+    content.innerHTML = `
+
+        <div class="career-card">
+
+            <div class="career">
+                ${career}
+            </div>
+
+            <p class="description">
+                ${roadmap.description}
+            </p>
+
+        </div>
+
+        <h2 style="margin-bottom:16px;">
+            Your Learning Path
+        </h2>
+
+        <div class="roadmap">
+            ${stepsHTML}
+        </div>
+
+        <div class="skills-card">
+
+            <h2>Recommended Skills</h2>
+
+            <div class="skills">
+                ${skillsHTML}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
