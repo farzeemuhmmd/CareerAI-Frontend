@@ -1,0 +1,51 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:#fff;
+}
+
+a{
+    transition:.2s ease;
+}
+
+.card,
+.feature,
+.career{
+    animation:fadeUp .6s ease both;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:768px){
+
+    .container{
+        width:92%;
+    }
+
+    button,
+    .btn,
+    .action{
+        min-height:44px;
+    }
+
+}
