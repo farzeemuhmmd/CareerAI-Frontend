@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | CareerAI</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:
+        radial-gradient(circle at top right,#12345a,transparent 40%),
+        #07111f;
+    color:#fff;
+    min-height:100vh;
+}
+
+.navbar{
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(7,17,31,.8);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.logout{
+    border:1px solid #36506b;
+    background:transparent;
+    color:#dce9f5;
+    padding:9px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.logout:hover{
+    border-color:#6ee7ff;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
+}
+
+.welcome{
+    margin-bottom:30px;
+}
+
+.welcome h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.welcome p{
+    color:#9fb0c3;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    background:rgba(15,30,50,.88);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.card h3{
+    color:#9fb0c3;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.value{
+    font-size:25px;
+    font-weight:700;
+}
+
+.section{
+    margin-top:25px;
+}
+
+.section h2{
+    margin-bottom:16px;
+}
+
+.recommendation{
+    border:1px solid rgba(110,231,255,.18);
+    background:linear-gradient(
+        135deg,
+        rgba(110,231,255,.08),
+        rgba(56,239,125,.06)
+    );
+}
+
+.career{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:10px;
+    color:#6ee7ff;
+}
+
+.description{
+    color:#b7c7d8;
+    line-height:1.7;
+}
+
+.score{
+    margin-top:18px;
+    font-size:18px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.action{
+    text-decoration:none;
+    text-align:center;
+    padding:16px 10px;
+    border-radius:11px;
+    background:#0d2034;
+    border:1px solid #29415c;
+    color:#fff;
+    transition:.2s;
+}
+
+.action:hover{
+    border-color:#6ee7ff;
+    transform:translateY(-2px);
+}
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:16px;
+}
+
+.skill{
+    padding:8px 12px;
+    border-radius:20px;
+    background:rgba(110,231,255,.08);
+    border:1px solid rgba(110,231,255,.2);
+    color:#bcefff;
+    font-size:13px;
+}
+
+.empty{
+    color:#9fb0c3;
+    line-height:1.6;
+}
+
+@media(max-width:800px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .welcome h1{
+        font-size:28px;
+    }
+}
+
+@media(max-width:450px){
+    .actions{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        width:92%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">CareerAI</div>
+
+    <button class="logout" onclick="logout()">
+        Logout
+    </button>
+</nav>
+
+<main class="container">
+
+    <div class="welcome">
+        <h1 id="welcomeName">Welcome</h1>
+        <p>Your personalized career guidance dashboard</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Academic Percentage</h3>
+            <div class="value" id="academic">--</div>
+        </div>
+
+        <div class="card">
+            <h3>Student ID</h3>
+            <div class="value" id="studentId">--</div>
+        </div>
+
+        <div class="card">
+            <h3>Assessment Status</h3>
+            <div class="value" id="status">Not Taken</div>
+        </div>
+
+    </div>
+
+    <section class="section">
+        <div class="card recommendation">
+
+            <h2>Recommended Career</h2>
+
+            <div class="career" id="career">
+                Complete Assessment
+            </div>
+
+            <p class="description" id="careerDescription">
+                Take the career assessment to receive
+                your personalized recommendation.
+            </p>
+
+            <div class="score" id="score"></div>
+
+            <div class="skills" id="skills"></div>
+
+        </div>
+    </section>
+
+    <section class="section">
+
+        <h2>Quick Actions</h2>
+
+        <div class="actions">
+
+            <a class="action" href="assessment.html">
+                Take Assessment
+            </a>
+
+            <a class="action" href="recommendations.html">
+                Recommendations
+            </a>
+
+            <a class="action" href="roadmap.html">
+                Career Roadmap
+            </a>
+
+            <a class="action" href="profile.html">
+                My Profile
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+
+const studentData =
+    localStorage.getItem("careerAIStudent");
+
+if(!studentData){
+
+    window.location.href = "login.html";
+
+}else{
+
+    const student =
+        JSON.parse(studentData);
+
+    document.getElementById("welcomeName").textContent =
+        "Welcome, " + (student.name || "Student");
+
+    document.getElementById("academic").textContent =
+        student.academicPercentage != null
+        ? student.academicPercentage + "%"
+        : "--";
+
+    document.getElementById("studentId").textContent =
+        student.id || "--";
+}
+
+
+const assessmentData =
+    localStorage.getItem("careerAIAssessment");
+
+if(assessmentData){
+
+    const assessment =
+        JSON.parse(assessmentData);
+
+    document.getElementById("status").textContent =
+        "Completed";
+
+    if(assessment.career){
+
+        document.getElementById("career").textContent =
+            assessment.career;
+    }
+
+    if(assessment.description){
+
+        document.getElementById("careerDescription").textContent =
+            assessment.description;
+    }
+
+    if(assessment.score != null){
+
+        document.getElementById("score").textContent =
+            "Match Score: " + assessment.score + "%";
+    }
+
+    if(Array.isArray(assessment.skills)){
+
+        const skillsContainer =
+            document.getElementById("skills");
+
+        assessment.skills.forEach(function(skill){
+
+            const span =
+                document.createElement("span");
+
+            span.className = "skill";
+            span.textContent = skill;
+
+            skillsContainer.appendChild(span);
+
+        });
+    }
+}
+
+
+function logout(){
+
+    localStorage.removeItem("careerAIStudent");
+    localStorage.removeItem("careerAIAssessment");
+
+    window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>
