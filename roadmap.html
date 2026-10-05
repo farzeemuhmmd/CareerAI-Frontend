@@ -1,360 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Career Roadmap | CareerAI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <title>Career Roadmap - CareerAI</title>
 
-body{
-    font-family:Arial,sans-serif;
-    background:
-        radial-gradient(circle at top right,#12345a,transparent 40%),
-        #07111f;
-    color:#fff;
-    min-height:100vh;
-}
+    <style>
 
-.navbar{
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(7,17,31,.8);
-}
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-.logo{
-    font-size:25px;
-    font-weight:800;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    background-clip:text;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        body{
+            font-family:Arial,sans-serif;
+            background:#07111f;
+            color:white;
+            min-height:100vh;
+        }
 
-.back{
-    color:#6ee7ff;
-    text-decoration:none;
-}
+        .navbar{
+            padding:20px 7%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:#0b1728;
+            border-bottom:1px solid #203650;
+        }
 
-.container{
-    width:92%;
-    max-width:1000px;
-    margin:40px auto;
-}
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+            color:#38bdf8;
+        }
 
-.header{
-    margin-bottom:28px;
-}
+        .back{
+            color:white;
+            text-decoration:none;
+            padding:10px 18px;
+            border:1px solid #334b66;
+            border-radius:8px;
+        }
 
-.header h1{
-    font-size:34px;
-    margin-bottom:8px;
-}
+        .container{
+            width:90%;
+            max-width:900px;
+            margin:45px auto;
+        }
 
-.header p{
-    color:#9fb0c3;
-    line-height:1.6;
-}
+        .hero{
+            text-align:center;
+            margin-bottom:35px;
+        }
 
-.career-card{
-    background:rgba(15,30,50,.92);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:28px;
-    margin-bottom:28px;
-}
+        .hero h1{
+            font-size:38px;
+            margin-bottom:10px;
+        }
 
-.career{
-    color:#6ee7ff;
-    font-size:30px;
-    font-weight:800;
-    margin-bottom:10px;
-}
+        .hero p{
+            color:#a9b8ca;
+        }
 
-.description{
-    color:#b7c7d8;
-    line-height:1.7;
-}
+        .card{
+            background:#0d1b2e;
+            border:1px solid #203650;
+            border-radius:18px;
+            padding:30px;
+            margin-bottom:25px;
+            box-shadow:0 15px 40px rgba(0,0,0,.25);
+        }
 
-.roadmap{
-    display:grid;
-    gap:18px;
-}
+        .career-name{
+            color:#38bdf8;
+            font-size:30px;
+            margin-bottom:30px;
+        }
 
-.step{
-    position:relative;
-    background:rgba(15,30,50,.88);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:24px;
-    display:flex;
-    gap:20px;
-}
+        .step{
+            display:flex;
+            gap:18px;
+            margin-bottom:25px;
+        }
 
-.number{
-    min-width:48px;
-    height:48px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#6ee7ff,#38ef7d);
-    color:#06101b;
-    font-weight:800;
-    font-size:18px;
-}
+        .number{
+            min-width:42px;
+            height:42px;
+            border-radius:50%;
+            background:#38bdf8;
+            color:#06111d;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:bold;
+        }
 
-.step h3{
-    margin-bottom:8px;
-    font-size:20px;
-}
+        .step h3{
+            margin-bottom:7px;
+        }
 
-.step p{
-    color:#aebfd0;
-    line-height:1.65;
-}
+        .step p{
+            color:#aebed0;
+            line-height:1.6;
+        }
 
-.skills-card{
-    margin-top:28px;
-    background:rgba(15,30,50,.88);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:24px;
-}
+        .section-title{
+            font-size:20px;
+            margin:30px 0 15px;
+        }
 
-.skills-card h2{
-    margin-bottom:16px;
-}
+        .skills{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
 
-.skills{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
+        .skill{
+            background:#142943;
+            border:1px solid #294665;
+            padding:9px 14px;
+            border-radius:20px;
+            color:#d9efff;
+        }
 
-.skill{
-    padding:9px 13px;
-    border-radius:20px;
-    background:rgba(110,231,255,.08);
-    border:1px solid rgba(110,231,255,.2);
-    color:#bcefff;
-    font-size:13px;
-}
+        .btn{
+            display:inline-block;
+            margin-top:30px;
+            padding:13px 20px;
+            border-radius:9px;
+            background:#38bdf8;
+            color:#06111d;
+            text-decoration:none;
+            font-weight:bold;
+        }
 
-.empty{
-    text-align:center;
-    padding:40px;
-}
+        .empty{
+            text-align:center;
+            padding:45px 20px;
+        }
 
-.empty p{
-    color:#9fb0c3;
-    margin:12px 0 20px;
-}
+        @media(max-width:600px){
 
-.button{
-    display:inline-block;
-    padding:13px 20px;
-    border-radius:10px;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    color:#06101b;
-    text-decoration:none;
-    font-weight:800;
-}
+            .hero h1{
+                font-size:30px;
+            }
 
-@media(max-width:600px){
-    .header h1{
-        font-size:28px;
-    }
+            .career-name{
+                font-size:25px;
+            }
 
-    .career{
-        font-size:25px;
-    }
+            .card{
+                padding:22px;
+            }
 
-    .step{
-        padding:20px;
-    }
-}
-</style>
+        }
+
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar">
-    <div class="logo">CareerAI</div>
-    <a class="back" href="dashboard.html">Dashboard</a>
-</nav>
 
-<main class="container">
-
-    <div class="header">
-        <h1>Career Roadmap</h1>
-        <p>
-            Follow a structured learning path based on your
-            recommended career.
-        </p>
+    <div class="logo">
+        CareerAI
     </div>
 
-    <div id="content"></div>
+    <a href="dashboard.html" class="back">
+        Dashboard
+    </a>
 
-</main>
+</nav>
+
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>
+            Career Roadmap
+        </h1>
+
+        <p>
+            Your personalized path toward your recommended career
+        </p>
+
+    </div>
+
+
+    <div id="roadmap"></div>
+
+</div>
+
 
 <script>
 
 const assessmentData =
     localStorage.getItem("careerAIAssessment");
 
-const content =
-    document.getElementById("content");
+
+const roadmapContainer =
+    document.getElementById("roadmap");
+
 
 const roadmaps = {
 
-    "Software Developer":{
-        description:
-            "Build a strong foundation in programming, software development and modern application technologies.",
+    "Software Developer": {
 
         steps:[
-            ["Learn Programming",
-             "Master Java fundamentals, object-oriented programming, data structures and algorithms."],
-
-            ["Learn Databases",
-             "Understand SQL, relational databases and how applications store and retrieve information."],
-
-            ["Build Web Applications",
-             "Learn HTML, CSS, JavaScript and backend development concepts."],
-
-            ["Work With Projects",
-             "Create real-world applications and practice Git, debugging and software development workflows."],
-
-            ["Prepare For Careers",
-             "Build a portfolio, improve problem-solving skills and prepare for technical interviews."]
+            "Learn programming fundamentals",
+            "Build web and software projects",
+            "Learn databases and APIs",
+            "Practice Data Structures and Algorithms",
+            "Build a professional project portfolio"
         ],
 
         skills:[
+            "Programming",
             "Java",
-            "JavaScript",
+            "Python",
+            "Web Development",
             "SQL",
-            "Git",
-            "Data Structures",
-            "Web Development"
+            "Problem Solving"
         ]
+
     },
 
-    "Data Analyst":{
-        description:
-            "Develop analytical skills and learn how to turn raw data into useful insights.",
+
+    "Data Analyst": {
 
         steps:[
-            ["Learn Excel",
-             "Master spreadsheets, formulas, sorting, filtering and basic data analysis."],
+            "Learn Excel and data fundamentals",
+            "Learn SQL and statistics",
+            "Practice data cleaning",
+            "Learn data visualization",
+            "Build data analysis projects"
+        ],
 
-            ["Learn SQL",
-             "Practice querying databases and extracting useful information from datasets."],
+        skills:[
+            "Statistics",
+            "Excel",
+            "SQL",
+            "Data Analysis",
+            "Visualization",
+            "Critical Thinking"
+        ]
 
-            ["Learn Python",
-             "Use Python libraries for data cleaning, analysis and automation."],
+    },
 
-            ["Learn Visualization",
-             "Create meaningful charts and dashboards using data visualization tools."],
 
-            ["Build Data Projects",
-             "Analyze real datasets and create portfolio projects that demonstrate your skills."]
+    "AI / Machine Learning Engineer": {
+
+        steps:[
+            "Learn Python and mathematics",
+            "Study statistics and machine learning",
+            "Practice with datasets",
+            "Learn deep learning concepts",
+            "Build AI and machine learning projects"
         ],
 
         skills:[
             "Python",
-            "SQL",
-            "Excel",
+            "Machine Learning",
+            "Mathematics",
             "Statistics",
-            "Power BI",
-            "Data Visualization"
+            "Data Science",
+            "Problem Solving"
         ]
+
     },
 
-    "Cyber Security Specialist":{
-        description:
-            "Develop knowledge of networks, operating systems and security practices to protect digital systems.",
+
+    "Cybersecurity Specialist": {
 
         steps:[
-            ["Learn Networking",
-             "Understand IP addresses, protocols, DNS, routing and common network technologies."],
-
-            ["Learn Linux",
-             "Practice Linux commands, permissions, processes and system administration."],
-
-            ["Learn Security Basics",
-             "Study authentication, encryption, vulnerabilities and common cyber threats."],
-
-            ["Practice Security",
-             "Use legal labs and practice environments to understand security testing techniques."],
-
-            ["Build Security Knowledge",
-             "Study security frameworks, incident response and defensive security concepts."]
+            "Learn computer networking",
+            "Learn Linux fundamentals",
+            "Study cybersecurity concepts",
+            "Practice security analysis",
+            "Build cybersecurity projects"
         ],
 
         skills:[
             "Networking",
             "Linux",
-            "Cyber Security",
-            "System Administration",
-            "Risk Analysis",
-            "Security Tools"
+            "Cybersecurity",
+            "Security Analysis",
+            "Problem Solving",
+            "Risk Management"
         ]
+
     },
 
-    "UI/UX Designer":{
-        description:
-            "Develop design skills focused on creating useful, accessible and engaging digital experiences.",
+
+    "UI/UX Designer": {
 
         steps:[
-            ["Learn Design Principles",
-             "Study typography, layout, color, spacing and visual hierarchy."],
-
-            ["Learn Figma",
-             "Practice creating interfaces, components and design systems."],
-
-            ["Learn User Research",
-             "Understand user needs, personas, user journeys and usability testing."],
-
-            ["Create Prototypes",
-             "Build interactive prototypes and test different user experience ideas."],
-
-            ["Build A Portfolio",
-             "Document design projects and explain the decisions behind your work."]
+            "Learn design principles",
+            "Study UI and UX research",
+            "Learn wireframing and prototyping",
+            "Create mobile and web designs",
+            "Build a professional design portfolio"
         ],
 
         skills:[
-            "Figma",
+            "UI Design",
+            "UX Research",
             "Wireframing",
             "Prototyping",
-            "User Research",
-            "Typography",
-            "Visual Design"
+            "Creativity",
+            "Communication"
         ]
+
+    },
+
+
+    "Cloud Engineer": {
+
+        steps:[
+            "Learn Linux and networking",
+            "Study cloud computing fundamentals",
+            "Learn AWS, Azure or Google Cloud",
+            "Practice DevOps and deployment",
+            "Build cloud infrastructure projects"
+        ],
+
+        skills:[
+            "Cloud Computing",
+            "Networking",
+            "Linux",
+            "DevOps",
+            "Security",
+            "Problem Solving"
+        ]
+
+    },
+
+
+    "Doctor / Medical Professional": {
+
+        steps:[
+            "Build strong Biology and Chemistry knowledge",
+            "Prepare for medical entrance examinations",
+            "Complete medical education",
+            "Develop clinical skills",
+            "Complete internship and specialization"
+        ],
+
+        skills:[
+            "Biology",
+            "Anatomy",
+            "Clinical Reasoning",
+            "Patient Care",
+            "Communication",
+            "Decision Making"
+        ]
+
+    },
+
+
+    "Nurse": {
+
+        steps:[
+            "Build Biology and healthcare knowledge",
+            "Complete nursing education",
+            "Develop clinical skills",
+            "Gain hospital experience",
+            "Pursue nursing specialization"
+        ],
+
+        skills:[
+            "Patient Care",
+            "Communication",
+            "Empathy",
+            "Clinical Skills",
+            "Teamwork",
+            "Attention to Detail"
+        ]
+
+    },
+
+
+    "Pharmacist": {
+
+        steps:[
+            "Strengthen Chemistry and Biology",
+            "Study pharmacy fundamentals",
+            "Learn pharmacology and medicines",
+            "Complete practical training",
+            "Gain pharmacy experience"
+        ],
+
+        skills:[
+            "Pharmacology",
+            "Chemistry",
+            "Biology",
+            "Medicine Knowledge",
+            "Accuracy",
+            "Patient Counselling"
+        ]
+
+    },
+
+
+    "Medical Laboratory Technologist": {
+
+        steps:[
+            "Study Biology and Chemistry",
+            "Learn laboratory techniques",
+            "Practice diagnostic testing",
+            "Develop scientific analysis skills",
+            "Gain clinical laboratory experience"
+        ],
+
+        skills:[
+            "Biology",
+            "Chemistry",
+            "Laboratory Techniques",
+            "Scientific Reasoning",
+            "Data Analysis",
+            "Accuracy"
+        ]
+
+    },
+
+
+    "Physiotherapist": {
+
+        steps:[
+            "Study Biology and Human Anatomy",
+            "Learn exercise and rehabilitation science",
+            "Develop patient-care skills",
+            "Complete clinical training",
+            "Gain rehabilitation experience"
+        ],
+
+        skills:[
+            "Human Anatomy",
+            "Exercise Science",
+            "Patient Care",
+            "Communication",
+            "Observation",
+            "Empathy"
+        ]
+
+    },
+
+
+    "Biotechnology / Life Science Professional": {
+
+        steps:[
+            "Build Biology and Chemistry fundamentals",
+            "Study biotechnology and genetics",
+            "Learn laboratory techniques",
+            "Participate in research projects",
+            "Develop a life-science specialization"
+        ],
+
+        skills:[
+            "Biology",
+            "Genetics",
+            "Laboratory Techniques",
+            "Research",
+            "Data Analysis",
+            "Scientific Reasoning"
+        ]
+
+    },
+
+
+    "Teacher / Educator": {
+
+        steps:[
+            "Develop strong subject knowledge",
+            "Study teaching and learning methods",
+            "Practice communication and presentation",
+            "Gain classroom experience",
+            "Pursue teaching certification"
+        ],
+
+        skills:[
+            "Communication",
+            "Teaching",
+            "Presentation",
+            "Subject Knowledge",
+            "Patience",
+            "Classroom Management"
+        ]
+
+    },
+
+
+    "Lecturer / Academic Researcher": {
+
+        steps:[
+            "Build strong subject expertise",
+            "Complete higher education",
+            "Develop academic writing skills",
+            "Conduct academic research",
+            "Publish research and teach"
+        ],
+
+        skills:[
+            "Research",
+            "Teaching",
+            "Academic Writing",
+            "Communication",
+            "Critical Thinking",
+            "Subject Expertise"
+        ]
+
+    },
+
+
+    "Business Analyst": {
+
+        steps:[
+            "Learn business fundamentals",
+            "Develop data analysis skills",
+            "Learn SQL and visualization",
+            "Study business processes",
+            "Build analytical projects"
+        ],
+
+        skills:[
+            "Data Analysis",
+            "Communication",
+            "Problem Solving",
+            "Business Knowledge",
+            "Critical Thinking",
+            "Documentation"
+        ]
+
+    },
+
+
+    "Research Scientist": {
+
+        steps:[
+            "Build strong science fundamentals",
+            "Learn scientific research methods",
+            "Develop laboratory skills",
+            "Conduct research projects",
+            "Publish findings and specialize"
+        ],
+
+        skills:[
+            "Research",
+            "Scientific Method",
+            "Biology",
+            "Laboratory Skills",
+            "Data Analysis",
+            "Critical Thinking"
+        ]
+
     }
 
 };
 
+
 if(!assessmentData){
 
-    content.innerHTML = `
-        <div class="career-card empty">
-            <h2>Assessment Not Completed</h2>
-            <p>
-                Complete the career assessment first to
-                generate your personalized roadmap.
+    roadmapContainer.innerHTML = `
+
+        <div class="card empty">
+
+            <h2>
+                No Assessment Found
+            </h2>
+
+            <p style="margin-top:15px;color:#aebed0;">
+                Complete the career assessment first.
             </p>
-            <a class="button" href="assessment.html">
+
+            <a
+                href="assessment.html"
+                class="btn">
+
                 Take Assessment
+
             </a>
+
         </div>
+
     `;
 
 }else{
@@ -362,78 +592,120 @@ if(!assessmentData){
     const assessment =
         JSON.parse(assessmentData);
 
+
     const career =
-        assessment.career ||
-        "Software Developer";
+        assessment.career;
+
 
     const roadmap =
-        roadmaps[career] ||
-        roadmaps["Software Developer"];
+        roadmaps[career];
 
-    let stepsHTML = "";
 
-    roadmap.steps.forEach(function(step,index){
+    if(!roadmap){
 
-        stepsHTML += `
-            <div class="step">
+        roadmapContainer.innerHTML = `
 
-                <div class="number">
-                    ${index + 1}
-                </div>
+            <div class="card empty">
 
-                <div>
-                    <h3>${step[0]}</h3>
-                    <p>${step[1]}</p>
-                </div>
+                <h2>
+                    Roadmap Not Available
+                </h2>
+
+                <p style="margin-top:15px;color:#aebed0;">
+                    Please retake the assessment.
+                </p>
+
+                <a
+                    href="assessment.html"
+                    class="btn">
+
+                    Retake Assessment
+
+                </a>
 
             </div>
+
         `;
 
-    });
+    }else{
 
-    let skillsHTML = "";
+        roadmapContainer.innerHTML = `
 
-    roadmap.skills.forEach(function(skill){
+            <div class="card">
 
-        skillsHTML += `
-            <span class="skill">${skill}</span>
+                <div class="career-name">
+                    ${career}
+                </div>
+
+
+                ${roadmap.steps.map(
+                    function(step,index){
+
+                        return `
+
+                            <div class="step">
+
+                                <div class="number">
+                                    ${index + 1}
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        ${step}
+                                    </h3>
+
+                                    <p>
+                                        Focus on this stage to build the knowledge and experience required for your career.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join("")}
+
+
+                <div class="section-title">
+                    Key Skills
+                </div>
+
+
+                <div class="skills">
+
+                    ${roadmap.skills.map(
+                        function(skill){
+
+                            return `
+
+                                <span class="skill">
+                                    ${skill}
+                                </span>
+
+                            `;
+
+                        }
+                    ).join("")}
+
+                </div>
+
+
+                <a
+                    href="recommendations.html"
+                    class="btn">
+
+                    Back to Recommendation
+
+                </a>
+
+            </div>
+
         `;
 
-    });
-
-    content.innerHTML = `
-
-        <div class="career-card">
-
-            <div class="career">
-                ${career}
-            </div>
-
-            <p class="description">
-                ${roadmap.description}
-            </p>
-
-        </div>
-
-        <h2 style="margin-bottom:16px;">
-            Your Learning Path
-        </h2>
-
-        <div class="roadmap">
-            ${stepsHTML}
-        </div>
-
-        <div class="skills-card">
-
-            <h2>Recommended Skills</h2>
-
-            <div class="skills">
-                ${skillsHTML}
-            </div>
-
-        </div>
-
-    `;
+    }
 
 }
 
