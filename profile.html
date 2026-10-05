@@ -1,361 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile | CareerAI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <title>CareerAI - Student Profile</title>
 
-body{
-    font-family:Arial,sans-serif;
-    background:
-        radial-gradient(circle at top right,#12345a,transparent 40%),
-        #07111f;
-    color:#fff;
-    min-height:100vh;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.navbar{
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(7,17,31,.8);
-}
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #07111f, #102a43);
+            color: white;
+            padding: 30px 20px;
+        }
 
-.logo{
-    font-size:25px;
-    font-weight:800;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    background-clip:text;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
 
-.back{
-    color:#6ee7ff;
-    text-decoration:none;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-.container{
-    width:92%;
-    max-width:900px;
-    margin:40px auto;
-}
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
 
-.header{
-    margin-bottom:25px;
-}
+        .header p {
+            color: #b8c7d9;
+        }
 
-.header h1{
-    font-size:34px;
-    margin-bottom:8px;
-}
+        .profile-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+        }
 
-.header p{
-    color:#9fb0c3;
-}
+        .profile-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: bold;
+        }
 
-.profile-card{
-    background:rgba(15,30,50,.92);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:30px;
-}
+        .info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
 
-.avatar{
-    width:85px;
-    height:85px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-    font-weight:800;
-    background:linear-gradient(135deg,#6ee7ff,#38ef7d);
-    color:#06101b;
-    margin-bottom:22px;
-}
+        .info-box {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 18px;
+            border-radius: 12px;
+        }
 
-.name{
-    font-size:28px;
-    font-weight:800;
-    margin-bottom:6px;
-}
+        .info-box .label {
+            color: #8fa6bd;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
 
-.email{
-    color:#9fb0c3;
-    margin-bottom:28px;
-}
+        .info-box .value {
+            font-size: 17px;
+            font-weight: bold;
+            word-break: break-word;
+        }
 
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
+        .message {
+            text-align: center;
+            padding: 30px;
+            color: #b8c7d9;
+        }
 
-.info{
-    padding:18px;
-    border-radius:12px;
-    background:#0b1929;
-    border:1px solid #29415c;
-}
+        .error {
+            color: #f87171;
+        }
 
-.info-label{
-    color:#8195aa;
-    font-size:13px;
-    margin-bottom:7px;
-}
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 13px;
+            text-align: center;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+        }
 
-.info-value{
-    font-size:17px;
-    font-weight:700;
-}
+        .back-button:hover {
+            background: #1d4ed8;
+        }
 
-.skills-card{
-    margin-top:20px;
-    background:rgba(15,30,50,.92);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:25px;
-}
+        @media (max-width: 600px) {
 
-.skills-card h2{
-    margin-bottom:16px;
-}
+            .info {
+                grid-template-columns: 1fr;
+            }
 
-.skills{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
+            .profile-card {
+                padding: 20px;
+            }
 
-.skill{
-    padding:9px 13px;
-    border-radius:20px;
-    background:rgba(110,231,255,.08);
-    border:1px solid rgba(110,231,255,.2);
-    color:#bcefff;
-    font-size:13px;
-}
-
-.empty{
-    text-align:center;
-    padding:40px;
-}
-
-.empty p{
-    color:#9fb0c3;
-    margin:12px 0 20px;
-}
-
-.button{
-    display:inline-block;
-    padding:13px 20px;
-    border-radius:10px;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    color:#06101b;
-    text-decoration:none;
-    font-weight:800;
-}
-
-@media(max-width:600px){
-    .header h1{
-        font-size:28px;
-    }
-
-    .info-grid{
-        grid-template-columns:1fr;
-    }
-
-    .profile-card{
-        padding:22px;
-    }
-}
-</style>
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-    <div class="logo">CareerAI</div>
-    <a class="back" href="dashboard.html">Dashboard</a>
-</nav>
-
-<main class="container">
+<div class="container">
 
     <div class="header">
-        <h1>My Profile</h1>
-        <p>View your CareerAI student profile.</p>
+        <h1>Student Profile</h1>
+        <p>CareerAI Student Information</p>
     </div>
 
-    <div id="content"></div>
+    <div class="profile-card">
 
-</main>
+        <div id="profileContent">
+
+            <div class="message">
+                Loading student profile...
+            </div>
+
+        </div>
+
+    </div>
+
+    <a href="admin.html" class="back-button">
+        ← Back to Admin Panel
+    </a>
+
+</div>
 
 <script>
 
-const studentData =
-    localStorage.getItem("careerAIStudent");
+    async function loadStudentProfile() {
 
-const content =
-    document.getElementById("content");
+        const profileContent =
+            document.getElementById("profileContent");
 
-if(!studentData){
+        const urlParams =
+            new URLSearchParams(window.location.search);
 
-    content.innerHTML = `
-        <div class="profile-card empty">
+        const studentId =
+            urlParams.get("id");
 
-            <h2>Login Required</h2>
+        if (!studentId) {
 
-            <p>
-                Please login to view your profile.
-            </p>
-
-            <a class="button" href="login.html">
-                Login
-            </a>
-
-        </div>
-    `;
-
-}else{
-
-    const student =
-        JSON.parse(studentData);
-
-    const name =
-        student.name || "Student";
-
-    const initial =
-        name.charAt(0).toUpperCase();
-
-    content.innerHTML = `
-
-        <div class="profile-card">
-
-            <div class="avatar">
-                ${initial}
-            </div>
-
-            <div class="name">
-                ${name}
-            </div>
-
-            <div class="email">
-                ${student.email || "No email available"}
-            </div>
-
-            <div class="info-grid">
-
-                <div class="info">
-                    <div class="info-label">
-                        Student ID
-                    </div>
-
-                    <div class="info-value">
-                        ${student.id || "--"}
-                    </div>
+            profileContent.innerHTML = `
+                <div class="message error">
+                    Student ID was not provided.
                 </div>
+            `;
 
-                <div class="info">
-                    <div class="info-label">
-                        Course
-                    </div>
-
-                    <div class="info-value">
-                        ${student.course || "--"}
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="info-label">
-                        Academic Percentage
-                    </div>
-
-                    <div class="info-value">
-                        ${
-                            student.academicPercentage != null
-                            ? student.academicPercentage + "%"
-                            : "--"
-                        }
-                    </div>
-                </div>
-
-                <div class="info">
-                    <div class="info-label">
-                        Career Assessment
-                    </div>
-
-                    <div class="info-value"
-                         id="assessmentStatus">
-                        Not Completed
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="skills-card">
-
-            <h2>Recommended Skills</h2>
-
-            <div class="skills" id="skills">
-                <span class="skill">Problem Solving</span>
-                <span class="skill">Communication</span>
-                <span class="skill">Technical Skills</span>
-            </div>
-
-        </div>
-    `;
-
-    const assessmentData =
-        localStorage.getItem("careerAIAssessment");
-
-    if(assessmentData){
-
-        const assessment =
-            JSON.parse(assessmentData);
-
-        document.getElementById("assessmentStatus")
-            .textContent =
-                assessment.career || "Completed";
-
-        if(
-            Array.isArray(assessment.skills) &&
-            assessment.skills.length > 0
-        ){
-
-            const skillsContainer =
-                document.getElementById("skills");
-
-            skillsContainer.innerHTML = "";
-
-            assessment.skills.forEach(function(skill){
-
-                const span =
-                    document.createElement("span");
-
-                span.className = "skill";
-                span.textContent = skill;
-
-                skillsContainer.appendChild(span);
-
-            });
-
+            return;
         }
 
+        try {
+
+            const response = await fetch(
+                "https://careerai-r4qf.onrender.com/api/students/"
+                + encodeURIComponent(studentId)
+            );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Student could not be found."
+                );
+            }
+
+            const student =
+                await response.json();
+
+            const firstLetter =
+                student.name
+                    ? student.name.charAt(0).toUpperCase()
+                    : "S";
+
+            profileContent.innerHTML = `
+
+                <div class="profile-icon">
+                    ${firstLetter}
+                </div>
+
+                <div class="info">
+
+                    <div class="info-box">
+                        <div class="label">
+                            Student ID
+                        </div>
+
+                        <div class="value">
+                            ${student.id ?? "N/A"}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">
+                            Full Name
+                        </div>
+
+                        <div class="value">
+                            ${student.name ?? "N/A"}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">
+                            Email
+                        </div>
+
+                        <div class="value">
+                            ${student.email ?? "N/A"}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">
+                            Course
+                        </div>
+
+                        <div class="value">
+                            ${student.course ?? "N/A"}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">
+                            Academic Percentage
+                        </div>
+
+                        <div class="value">
+                            ${student.academicPercentage ?? "N/A"}%
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">
+                            Assessment
+                        </div>
+
+                        <div class="value">
+                            Available through student dashboard
+                        </div>
+                    </div>
+
+                </div>
+            `;
+
+        } catch (error) {
+
+            profileContent.innerHTML = `
+                <div class="message error">
+                    ${error.message}
+                </div>
+            `;
+
+        }
     }
 
-}
+    loadStudentProfile();
 
 </script>
 
