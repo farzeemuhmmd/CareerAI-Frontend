@@ -1,495 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CareerAI - Career Assessment</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Career Assessment - CareerAI</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #07111f, #102a43);
-            color: white;
-            padding: 30px 20px;
+        body{
+            font-family:Arial,sans-serif;
+            background:#07111f;
+            color:white;
+            min-height:100vh;
         }
 
-        .container {
-            max-width: 850px;
-            margin: auto;
+        .navbar{
+            padding:20px 7%;
+            background:#0b1728;
+            border-bottom:1px solid #203650;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+            color:#38bdf8;
         }
 
-        .header h1 {
-            font-size: 34px;
-            margin-bottom: 10px;
+        .container{
+            width:90%;
+            max-width:850px;
+            margin:40px auto;
         }
 
-        .header p {
-            color: #b8c7d9;
-            line-height: 1.6;
+        .header{
+            text-align:center;
+            margin-bottom:30px;
         }
 
-        .progress-container {
-            background: rgba(255,255,255,.08);
-            height: 8px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            overflow: hidden;
+        .header h1{
+            font-size:36px;
+            margin-bottom:10px;
         }
 
-        .progress {
-            height: 100%;
-            width: 0%;
-            background: #2563eb;
-            transition: width .3s ease;
+        .header p{
+            color:#a9b8ca;
+            line-height:1.6;
         }
 
-        .question-card {
-            background: rgba(255,255,255,.08);
-            border-radius: 18px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0,0,0,.3);
-            backdrop-filter: blur(12px);
+        .progress-box{
+            background:#0d1b2e;
+            border:1px solid #203650;
+            padding:18px;
+            border-radius:12px;
+            margin-bottom:20px;
         }
 
-        .question-number {
-            color: #60a5fa;
-            font-weight: bold;
-            margin-bottom: 12px;
+        .progress-text{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:10px;
+            color:#a9b8ca;
         }
 
-        .question {
-            font-size: 23px;
-            line-height: 1.4;
-            margin-bottom: 25px;
+        .progress-bar{
+            width:100%;
+            height:8px;
+            background:#1d3048;
+            border-radius:20px;
+            overflow:hidden;
         }
 
-        .options {
-            display: grid;
-            gap: 12px;
+        .progress{
+            width:5%;
+            height:100%;
+            background:#38bdf8;
+            transition:.3s ease;
         }
 
-        .option {
-            padding: 16px;
-            border-radius: 10px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.12);
-            cursor: pointer;
-            transition: .2s ease;
+        .question-card{
+            background:#0d1b2e;
+            border:1px solid #203650;
+            border-radius:18px;
+            padding:30px;
         }
 
-        .option:hover {
-            background: rgba(37,99,235,.25);
-            border-color: #3b82f6;
+        .question{
+            font-size:23px;
+            line-height:1.5;
+            margin-bottom:25px;
         }
 
-        .option.selected {
-            background: #2563eb;
-            border-color: #60a5fa;
+        .options{
+            display:grid;
+            gap:12px;
         }
 
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 25px;
+        .option{
+            display:block;
+            width:100%;
+            text-align:left;
+            padding:16px;
+            border:1px solid #294665;
+            border-radius:10px;
+            background:#102239;
+            color:white;
+            cursor:pointer;
+            transition:.2s ease;
+            font-size:15px;
         }
 
-        button {
-            padding: 13px 24px;
-            border: none;
-            border-radius: 9px;
-            background: #2563eb;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
+        .option:hover{
+            border-color:#38bdf8;
+            background:#142b45;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .option.selected{
+            border-color:#38bdf8;
+            background:#123c59;
         }
 
-        button:disabled {
-            opacity: .45;
-            cursor: not-allowed;
+        .buttons{
+            display:flex;
+            justify-content:space-between;
+            gap:15px;
+            margin-top:25px;
         }
 
-        .result {
-            display: none;
-            background: rgba(255,255,255,.08);
-            border-radius: 18px;
-            padding: 35px;
-            text-align: center;
+        button{
+            border:none;
+            cursor:pointer;
+            padding:13px 22px;
+            border-radius:9px;
+            font-weight:bold;
+            font-size:15px;
         }
 
-        .result h2 {
-            font-size: 30px;
-            margin-bottom: 15px;
+        .previous{
+            background:#1b2d43;
+            color:white;
         }
 
-        .score {
-            color: #60a5fa;
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        .next{
+            background:#38bdf8;
+            color:#06111d;
         }
 
-        .description {
-            color: #c5d2df;
-            line-height: 1.7;
-            margin-bottom: 25px;
+        .result{
+            text-align:center;
         }
 
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
+        .result h2{
+            color:#38bdf8;
+            font-size:32px;
+            margin-bottom:15px;
         }
 
-        .skill {
-            background: rgba(37,99,235,.25);
-            padding: 8px 13px;
-            border-radius: 20px;
-            font-size: 14px;
+        .score{
+            font-size:22px;
+            margin:20px 0;
         }
 
-        .result a {
-            display: inline-block;
-            padding: 13px 22px;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 9px;
-            font-weight: bold;
-            margin: 5px;
+        .description{
+            color:#b9c8d9;
+            line-height:1.7;
+            margin-bottom:25px;
         }
 
-        .home-link {
-            background: #334155 !important;
+        .skills{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:10px;
         }
 
-        @media(max-width:600px) {
+        .skill{
+            background:#142943;
+            border:1px solid #294665;
+            padding:9px 14px;
+            border-radius:20px;
+        }
 
-            .question-card,
-            .result {
-                padding: 22px;
+        .dashboard-btn{
+            display:inline-block;
+            margin-top:30px;
+            padding:13px 20px;
+            background:#38bdf8;
+            color:#06111d;
+            text-decoration:none;
+            border-radius:9px;
+            font-weight:bold;
+        }
+
+        @media(max-width:600px){
+
+            .header h1{
+                font-size:29px;
             }
 
-            .question {
-                font-size: 19px;
+            .question{
+                font-size:20px;
             }
 
-            .navigation {
-                flex-direction: column;
+            .question-card{
+                padding:22px;
             }
 
-            button {
-                width: 100%;
-            }
         }
+
     </style>
+
 </head>
 
 <body>
 
+<nav class="navbar">
+
+    <div class="logo">
+        CareerAI
+    </div>
+
+</nav>
+
+
 <div class="container">
 
     <div class="header">
-        <h1>Career Assessment</h1>
+
+        <h1>
+            Career Assessment
+        </h1>
 
         <p>
-            Answer these questions based on your genuine interests,
-            strengths and preferred work style.
+            Answer the questions honestly to discover careers that match your interests, strengths and skills.
         </p>
-    </div>
-
-    <div id="assessmentArea">
-
-        <div class="progress-container">
-            <div id="progress" class="progress"></div>
-        </div>
-
-        <div class="question-card">
-
-            <div id="questionNumber" class="question-number"></div>
-
-            <div id="question" class="question"></div>
-
-            <div id="options" class="options"></div>
-
-            <div class="navigation">
-
-                <button
-                    id="previousButton"
-                    onclick="previousQuestion()">
-                    Previous
-                </button>
-
-                <button
-                    id="nextButton"
-                    onclick="nextQuestion()">
-                    Next
-                </button>
-
-            </div>
-
-        </div>
 
     </div>
 
-    <div id="result" class="result"></div>
+
+    <div id="assessmentArea"></div>
 
 </div>
 
+
 <script>
+
+/* =========================
+   QUESTIONS
+========================= */
 
 const questions = [
 
     {
-        question:
-            "Which activity sounds most interesting to you?",
-        options: [
-            ["Building software or websites", "technology"],
-            ["Helping patients and caring for people", "healthcare"],
-            ["Teaching or explaining subjects", "education"],
-            ["Conducting experiments or studying living things", "biology"]
+        question:"Which type of activity do you enjoy most?",
+        options:[
+            ["Building software or websites","software"],
+            ["Analyzing numbers and information","data"],
+            ["Helping or caring for people","healthcare"],
+            ["Teaching or explaining concepts","teacher"]
         ]
     },
 
     {
-        question:
-            "Which subject do you enjoy the most?",
-        options: [
-            ["Computer Science", "technology"],
-            ["Biology", "biology"],
-            ["Mathematics and Statistics", "data"],
-            ["Languages and Social Sciences", "education"]
+        question:"Which subject interests you the most?",
+        options:[
+            ["Computer Science","technology"],
+            ["Biology","biology"],
+            ["Mathematics and Statistics","data"],
+            ["Education and Languages","education"]
         ]
     },
 
     {
-        question:
-            "How would you feel about working in a hospital?",
-        options: [
-            ["Very interested", "healthcare"],
-            ["Interested in laboratory work", "lab"],
-            ["Not particularly interested", "technology"],
-            ["I prefer teaching or office work", "education"]
+        question:"What kind of problem do you enjoy solving?",
+        options:[
+            ["Technical problems","technology"],
+            ["Scientific problems","research"],
+            ["Health-related problems","medical"],
+            ["Business problems","business"]
         ]
     },
 
     {
-        question:
-            "What type of problem do you enjoy solving?",
-        options: [
-            ["Programming and technical problems", "technology"],
-            ["Medical or biological problems", "healthcare"],
-            ["Data and numerical problems", "data"],
-            ["People, learning and communication problems", "education"]
+        question:"Which activity sounds most interesting?",
+        options:[
+            ["Writing computer programs","software"],
+            ["Conducting laboratory experiments","lab"],
+            ["Working with patients","patient"],
+            ["Teaching students","teacher"]
         ]
     },
 
     {
-        question:
-            "Which activity would you enjoy in a laboratory?",
-        options: [
-            ["Studying cells, genes or organisms", "biology"],
-            ["Testing medical samples", "lab"],
-            ["Developing technology or software", "technology"],
-            ["I would rather teach or communicate", "education"]
+        question:"Which skill describes you best?",
+        options:[
+            ["Logical thinking","technology"],
+            ["Scientific thinking","research"],
+            ["Empathy and patience","patient"],
+            ["Communication","communication"]
         ]
     },
 
     {
-        question:
-            "Which work environment appeals to you most?",
-        options: [
-            ["Technology company", "technology"],
-            ["Hospital or healthcare centre", "healthcare"],
-            ["School or college", "education"],
-            ["Research or laboratory", "biology"]
+        question:"What would you enjoy working with?",
+        options:[
+            ["Computers and technology","technology"],
+            ["Biological systems and living organisms","biology"],
+            ["Medicines and healthcare","pharmacy"],
+            ["Students and learners","education"]
         ]
     },
 
     {
-        question:
-            "What is your strongest natural ability?",
-        options: [
-            ["Logical thinking", "technology"],
-            ["Understanding people", "healthcare"],
-            ["Explaining ideas clearly", "education"],
-            ["Scientific curiosity", "biology"]
+        question:"Which environment would you prefer?",
+        options:[
+            ["Technology company","software"],
+            ["Hospital or clinic","healthcare"],
+            ["Laboratory or research centre","lab"],
+            ["School or college","education"]
         ]
     },
 
     {
-        question:
-            "Which activity sounds most rewarding?",
-        options: [
-            ["Creating an application", "software"],
-            ["Helping a patient recover", "healthcare"],
-            ["Helping students understand a topic", "education"],
-            ["Discovering something through research", "research"]
+        question:"Which task sounds most enjoyable?",
+        options:[
+            ["Designing an application","software"],
+            ["Analyzing experimental results","data"],
+            ["Helping a patient recover","patient"],
+            ["Explaining a difficult topic","teacher"]
         ]
     },
 
     {
-        question:
-            "How interested are you in human anatomy and physiology?",
-        options: [
-            ["Very interested", "medical"],
-            ["Somewhat interested", "healthcare"],
-            ["Interested mainly from a research perspective", "biology"],
-            ["Not very interested", "technology"]
+        question:"Which area interests you most?",
+        options:[
+            ["Artificial Intelligence","ai"],
+            ["Human health","medical"],
+            ["Genetics and biotechnology","biology"],
+            ["Business and management","business"]
         ]
     },
 
     {
-        question:
-            "Which activity would you prefer?",
-        options: [
-            ["Analyzing datasets", "data"],
-            ["Performing laboratory tests", "lab"],
-            ["Teaching a group of students", "education"],
-            ["Designing software", "software"]
+        question:"How do you prefer to work?",
+        options:[
+            ["Independently with technology","technology"],
+            ["With patients and healthcare teams","healthcare"],
+            ["With experiments and research","research"],
+            ["With students and groups","teacher"]
         ]
     },
 
     {
-        question:
-            "Which statement describes you best?",
-        options: [
-            ["I enjoy computers and technology", "technology"],
-            ["I enjoy caring for people", "healthcare"],
-            ["I enjoy explaining and guiding others", "education"],
-            ["I enjoy science and experiments", "biology"]
+        question:"Which skill would you most like to develop?",
+        options:[
+            ["Programming","software"],
+            ["Clinical skills","medical"],
+            ["Laboratory techniques","lab"],
+            ["Presentation and teaching","teacher"]
         ]
     },
 
     {
-        question:
-            "Which career activity sounds most exciting?",
-        options: [
-            ["Developing artificial intelligence", "ai"],
-            ["Working with medicines", "pharmacy"],
-            ["Teaching students", "teacher"],
-            ["Studying diseases and biological systems", "research"]
+        question:"Which subject combination attracts you?",
+        options:[
+            ["Programming and Mathematics","ai"],
+            ["Biology and Chemistry","biology"],
+            ["Medicine and Anatomy","medical"],
+            ["Business and Statistics","business"]
         ]
     },
 
     {
-        question:
-            "How do you feel about mathematics?",
-        options: [
-            ["I really enjoy it", "data"],
-            ["I use it when solving technical problems", "technology"],
-            ["I prefer biology and science", "biology"],
-            ["I prefer communication and people", "education"]
+        question:"What kind of impact would you like to make?",
+        options:[
+            ["Create useful technology","technology"],
+            ["Improve people's health","healthcare"],
+            ["Discover new scientific knowledge","research"],
+            ["Help people learn","education"]
         ]
     },
 
     {
-        question:
-            "Which skill would you most like to develop?",
-        options: [
-            ["Programming", "software"],
-            ["Clinical and patient-care skills", "healthcare"],
-            ["Teaching and presentation", "teacher"],
-            ["Laboratory and research skills", "lab"]
+        question:"Which task would you choose?",
+        options:[
+            ["Protecting computer systems","cybersecurity"],
+            ["Developing medicines","pharmacy"],
+            ["Testing biological samples","lab"],
+            ["Teaching a class","teacher"]
         ]
     },
 
     {
-        question:
-            "What motivates you most?",
-        options: [
-            ["Creating innovative technology", "technology"],
-            ["Improving people's health", "healthcare"],
-            ["Helping people learn", "education"],
-            ["Discovering new scientific knowledge", "research"]
+        question:"Which career activity sounds most appealing?",
+        options:[
+            ["Building cloud systems","cloud"],
+            ["Working with medicines","pharmacy"],
+            ["Helping people improve movement","physiotherapy"],
+            ["Performing scientific research","research"]
         ]
     },
 
     {
-        question:
-            "Which activity requires the type of attention you enjoy?",
-        options: [
-            ["Debugging code", "software"],
-            ["Checking medical information carefully", "medical"],
-            ["Preparing lessons", "teacher"],
-            ["Analyzing laboratory results", "lab"]
+        question:"What type of work suits your personality?",
+        options:[
+            ["Technical and analytical","technology"],
+            ["Caring and people-focused","patient"],
+            ["Scientific and experimental","research"],
+            ["Educational and communicative","education"]
         ]
     },
 
     {
-        question:
-            "Which field interests you most?",
-        options: [
-            ["Artificial Intelligence", "ai"],
-            ["Medicine and healthcare", "healthcare"],
-            ["Education and teaching", "education"],
-            ["Biotechnology and life sciences", "biology"]
+        question:"Which technology area interests you?",
+        options:[
+            ["Cybersecurity","cybersecurity"],
+            ["Cloud computing","cloud"],
+            ["Artificial Intelligence","ai"],
+            ["User interface design","design"]
         ]
     },
 
     {
-        question:
-            "Would you enjoy working directly with people every day?",
-        options: [
-            ["Yes, especially patients", "healthcare"],
-            ["Yes, especially students", "teacher"],
-            ["Sometimes, but I prefer technology", "technology"],
-            ["I prefer laboratory or research work", "research"]
+        question:"Which healthcare area interests you most?",
+        options:[
+            ["Diagnosis and medicine","medical"],
+            ["Patient care","nurse"],
+            ["Medicines and pharmacy","pharmacy"],
+            ["Physical rehabilitation","physiotherapy"]
         ]
     },
 
     {
-        question:
-            "Which achievement would make you most proud?",
-        options: [
-            ["Building useful software", "software"],
-            ["Helping someone improve their health", "healthcare"],
-            ["Helping students succeed", "education"],
-            ["Making a scientific discovery", "research"]
+        question:"Which long-term activity would you enjoy?",
+        options:[
+            ["Developing technology","software"],
+            ["Teaching and mentoring","teacher"],
+            ["Scientific research","research"],
+            ["Business analysis","business"]
         ]
     },
 
     {
-        question:
-            "Which career direction feels closest to your personality?",
-        options: [
-            ["Technology and innovation", "technology"],
-            ["Healthcare and patient care", "healthcare"],
-            ["Teaching and education", "education"],
-            ["Science and biological research", "biology"]
+        question:"Which statement sounds most like you?",
+        options:[
+            ["I enjoy creating and building things","software"],
+            ["I enjoy understanding living systems","biology"],
+            ["I enjoy helping people directly","healthcare"],
+            ["I enjoy explaining and sharing knowledge","education"]
         ]
     }
 
 ];
 
 
+/* =========================
+   CAREERS
+========================= */
+
 const careers = {
 
-    "Software Developer": {
-        keys: ["technology", "software"],
-        description:
-            "Designs, develops and maintains software applications and digital systems.",
-        skills: [
+    "Software Developer":{
+        keys:["software","technology"],
+        description:"Designs, develops and maintains software applications and digital systems.",
+        skills:[
             "Programming",
             "Problem Solving",
             "Algorithms",
@@ -499,11 +484,10 @@ const careers = {
         ]
     },
 
-    "Data Analyst": {
-        keys: ["data"],
-        description:
-            "Analyzes data to discover patterns, trends and insights that support decision-making.",
-        skills: [
+    "Data Analyst":{
+        keys:["data","business"],
+        description:"Analyzes data to discover patterns, trends and insights that support decision-making.",
+        skills:[
             "Statistics",
             "Data Analysis",
             "Excel",
@@ -513,11 +497,10 @@ const careers = {
         ]
     },
 
-    "AI / Machine Learning Engineer": {
-        keys: ["ai", "technology"],
-        description:
-            "Develops intelligent systems using artificial intelligence and machine learning techniques.",
-        skills: [
+    "AI / Machine Learning Engineer":{
+        keys:["ai","technology","data"],
+        description:"Develops intelligent systems using artificial intelligence and machine learning techniques.",
+        skills:[
             "Python",
             "Machine Learning",
             "Mathematics",
@@ -527,11 +510,10 @@ const careers = {
         ]
     },
 
-    "Cybersecurity Specialist": {
-        keys: ["technology"],
-        description:
-            "Protects computer systems, networks and data from security threats.",
-        skills: [
+    "Cybersecurity Specialist":{
+        keys:["cybersecurity","technology"],
+        description:"Protects computer systems, networks and data from security threats.",
+        skills:[
             "Networking",
             "Cybersecurity",
             "Linux",
@@ -541,11 +523,10 @@ const careers = {
         ]
     },
 
-    "UI/UX Designer": {
-        keys: ["technology"],
-        description:
-            "Designs user-friendly digital interfaces and experiences.",
-        skills: [
+    "UI/UX Designer":{
+        keys:["design","technology"],
+        description:"Designs user-friendly digital interfaces and experiences.",
+        skills:[
             "UI Design",
             "UX Research",
             "Wireframing",
@@ -555,11 +536,10 @@ const careers = {
         ]
     },
 
-    "Cloud Engineer": {
-        keys: ["technology"],
-        description:
-            "Designs and manages cloud-based infrastructure and services.",
-        skills: [
+    "Cloud Engineer":{
+        keys:["cloud","technology"],
+        description:"Designs and manages cloud-based infrastructure and services.",
+        skills:[
             "Cloud Computing",
             "Networking",
             "Linux",
@@ -569,11 +549,10 @@ const careers = {
         ]
     },
 
-    "Doctor / Medical Professional": {
-        keys: ["medical", "healthcare"],
-        description:
-            "Works in healthcare to diagnose, treat and manage medical conditions.",
-        skills: [
+    "Doctor / Medical Professional":{
+        keys:["medical","healthcare"],
+        description:"Works in healthcare to diagnose, treat and manage medical conditions.",
+        skills:[
             "Biology",
             "Anatomy",
             "Clinical Reasoning",
@@ -583,11 +562,10 @@ const careers = {
         ]
     },
 
-    "Nurse": {
-        keys: ["healthcare"],
-        description:
-            "Provides patient care, supports treatment and works closely with healthcare teams.",
-        skills: [
+    "Nurse":{
+        keys:["nurse","healthcare","patient"],
+        description:"Provides patient care, supports treatment and works closely with healthcare teams.",
+        skills:[
             "Patient Care",
             "Communication",
             "Empathy",
@@ -597,11 +575,10 @@ const careers = {
         ]
     },
 
-    "Pharmacist": {
-        keys: ["pharmacy", "healthcare"],
-        description:
-            "Works with medicines, medication safety and patient counselling.",
-        skills: [
+    "Pharmacist":{
+        keys:["pharmacy","healthcare"],
+        description:"Works with medicines, medication safety and patient counselling.",
+        skills:[
             "Pharmacology",
             "Chemistry",
             "Biology",
@@ -611,11 +588,10 @@ const careers = {
         ]
     },
 
-    "Medical Laboratory Technologist": {
-        keys: ["lab"],
-        description:
-            "Performs laboratory testing and analysis that helps healthcare professionals diagnose conditions.",
-        skills: [
+    "Medical Laboratory Technologist":{
+        keys:["lab","biology","research"],
+        description:"Performs laboratory testing and analysis that helps healthcare professionals diagnose conditions.",
+        skills:[
             "Biology",
             "Chemistry",
             "Laboratory Techniques",
@@ -625,11 +601,10 @@ const careers = {
         ]
     },
 
-    "Physiotherapist": {
-        keys: ["healthcare"],
-        description:
-            "Helps patients improve movement, physical function and recovery from injury or illness.",
-        skills: [
+    "Physiotherapist":{
+        keys:["physiotherapy","healthcare","patient"],
+        description:"Helps patients improve movement, physical function and recovery from injury or illness.",
+        skills:[
             "Human Anatomy",
             "Exercise Science",
             "Patient Care",
@@ -639,11 +614,10 @@ const careers = {
         ]
     },
 
-    "Biotechnology / Life Science Professional": {
-        keys: ["biology", "research"],
-        description:
-            "Applies biological science and research techniques to healthcare, agriculture, industry and scientific discovery.",
-        skills: [
+    "Biotechnology / Life Science Professional":{
+        keys:["biology","research","lab"],
+        description:"Applies biological science and research techniques to healthcare, agriculture, industry and scientific discovery.",
+        skills:[
             "Biology",
             "Genetics",
             "Laboratory Techniques",
@@ -653,11 +627,10 @@ const careers = {
         ]
     },
 
-    "Teacher / Educator": {
-        keys: ["education", "teacher"],
-        description:
-            "Helps students learn, develop skills and understand academic concepts.",
-        skills: [
+    "Teacher / Educator":{
+        keys:["teacher","education","communication"],
+        description:"Helps students learn, develop skills and understand academic concepts.",
+        skills:[
             "Communication",
             "Teaching",
             "Presentation",
@@ -667,11 +640,10 @@ const careers = {
         ]
     },
 
-    "Lecturer / Academic Researcher": {
-        keys: ["education", "research"],
-        description:
-            "Combines advanced teaching with academic research and knowledge development.",
-        skills: [
+    "Lecturer / Academic Researcher":{
+        keys:["education","research","communication"],
+        description:"Combines advanced teaching with academic research and knowledge development.",
+        skills:[
             "Research",
             "Teaching",
             "Academic Writing",
@@ -681,11 +653,10 @@ const careers = {
         ]
     },
 
-    "Business Analyst": {
-        keys: ["data", "education"],
-        description:
-            "Studies business problems, data and processes to help organizations make better decisions.",
-        skills: [
+    "Business Analyst":{
+        keys:["business","data"],
+        description:"Studies business problems, data and processes to help organizations make better decisions.",
+        skills:[
             "Data Analysis",
             "Communication",
             "Problem Solving",
@@ -695,11 +666,10 @@ const careers = {
         ]
     },
 
-    "Research Scientist": {
-        keys: ["research", "biology", "lab"],
-        description:
-            "Conducts scientific research to investigate questions and develop new knowledge.",
-        skills: [
+    "Research Scientist":{
+        keys:["research","biology","lab"],
+        description:"Conducts scientific research to investigate questions and develop new knowledge.",
+        skills:[
             "Research",
             "Scientific Method",
             "Biology",
@@ -712,220 +682,334 @@ const careers = {
 };
 
 
+/* =========================
+   STATE
+========================= */
+
 let currentQuestion = 0;
 
 let answers = [];
 
 
-function showQuestion() {
+/* =========================
+   DISPLAY
+========================= */
 
-    const question =
+function showQuestion(){
+
+    const area =
+        document.getElementById("assessmentArea");
+
+    const q =
         questions[currentQuestion];
 
-    document.getElementById("questionNumber")
-        .textContent =
-        "Question " +
-        (currentQuestion + 1) +
-        " of " +
-        questions.length;
+    const selected =
+        answers[currentQuestion];
 
-    document.getElementById("question")
-        .textContent =
-        question.question;
 
-    const optionsContainer =
-        document.getElementById("options");
+    area.innerHTML = `
 
-    optionsContainer.innerHTML = "";
+        <div class="progress-box">
 
-    question.options.forEach(
-        function(option, index) {
+            <div class="progress-text">
 
-            const div =
-                document.createElement("div");
+                <span>
+                    Question ${currentQuestion + 1}
+                    of ${questions.length}
+                </span>
 
-            div.className = "option";
+                <span>
+                    ${Math.round(
+                        ((currentQuestion + 1) /
+                        questions.length) * 100
+                    )}%
+                </span>
 
-            div.textContent = option[0];
+            </div>
 
-            if (
-                answers[currentQuestion] ===
-                option[1]
-            ) {
-                div.classList.add("selected");
-            }
+            <div class="progress-bar">
 
-            div.onclick = function() {
+                <div
+                    class="progress"
+                    style="width:${
+                        ((currentQuestion + 1) /
+                        questions.length) * 100
+                    }%">
+                </div>
 
-                answers[currentQuestion] =
-                    option[1];
+            </div>
 
-                document
-                    .querySelectorAll(".option")
-                    .forEach(
-                        function(item) {
-                            item.classList.remove(
-                                "selected"
-                            );
-                        }
-                    );
+        </div>
 
-                div.classList.add("selected");
-            };
 
-            optionsContainer.appendChild(div);
-        }
-    );
+        <div class="question-card">
 
-    document.getElementById("progress")
-        .style.width =
-        (
-            (currentQuestion + 1) /
-            questions.length *
-            100
-        ) + "%";
+            <div class="question">
+                ${q.question}
+            </div>
 
-    document.getElementById("previousButton")
-        .disabled =
-        currentQuestion === 0;
+            <div class="options">
 
-    document.getElementById("nextButton")
-        .textContent =
-        currentQuestion ===
-        questions.length - 1
-            ? "Get My Career"
-            : "Next";
+                ${q.options.map(
+                    function(option,index){
+
+                        return `
+
+                            <button
+                                class="option ${
+                                    selected === option[1]
+                                    ? "selected"
+                                    : ""
+                                }"
+                                onclick="selectAnswer(
+                                    '${option[1]}',
+                                    this
+                                )">
+
+                                ${option[0]}
+
+                            </button>
+
+                        `;
+
+                    }
+                ).join("")}
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    class="previous"
+                    onclick="previousQuestion()"
+                    ${currentQuestion === 0 ? "disabled" : ""}>
+
+                    Previous
+
+                </button>
+
+
+                <button
+                    class="next"
+                    onclick="nextQuestion()">
+
+                    ${
+                        currentQuestion === questions.length - 1
+                        ? "Finish Assessment"
+                        : "Next"
+                    }
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
 }
 
 
-function nextQuestion() {
+function selectAnswer(value,button){
 
-    if (!answers[currentQuestion]) {
+    answers[currentQuestion] = value;
 
-        alert(
-            "Please select an answer before continuing."
-        );
+    document
+        .querySelectorAll(".option")
+        .forEach(function(option){
+
+            option.classList.remove("selected");
+
+        });
+
+    button.classList.add("selected");
+
+}
+
+
+function nextQuestion(){
+
+    if(!answers[currentQuestion]){
+
+        alert("Please select an answer.");
 
         return;
+
     }
 
-    if (
-        currentQuestion <
-        questions.length - 1
-    ) {
+
+    if(currentQuestion <
+        questions.length - 1){
 
         currentQuestion++;
 
         showQuestion();
 
-    } else {
+    }else{
 
         calculateResult();
 
     }
+
 }
 
 
-function previousQuestion() {
+function previousQuestion(){
 
-    if (currentQuestion > 0) {
+    if(currentQuestion > 0){
 
         currentQuestion--;
 
         showQuestion();
+
     }
+
 }
 
 
-function calculateResult() {
+/* =========================
+   CALCULATE RESULT
+========================= */
+
+function calculateResult(){
 
     const scores = {};
 
-    Object.keys(careers)
-        .forEach(
-            function(career) {
-                scores[career] = 0;
-            }
-        );
 
+    Object.keys(careers).forEach(
+        function(career){
 
-    answers.forEach(
-        function(answer) {
-
-            Object.keys(careers)
-                .forEach(
-                    function(career) {
-
-                        if (
-                            careers[career]
-                                .keys
-                                .includes(answer)
-                        ) {
-
-                            scores[career]++;
-
-                        }
-
-                    }
-                );
+            scores[career] = 0;
 
         }
     );
 
 
-    let recommendedCareer =
-        Object.keys(scores)[0];
+    answers.forEach(
+        function(answer){
 
-    Object.keys(scores)
-        .forEach(
-            function(career) {
+            Object.keys(careers).forEach(
+                function(careerName){
 
-                if (
-                    scores[career] >
-                    scores[recommendedCareer]
-                ) {
+                    const career =
+                        careers[careerName];
 
-                    recommendedCareer =
-                        career;
+                    if(
+                        career.keys.includes(answer)
+                    ){
+
+                        scores[careerName] += 1;
+
+                    }
 
                 }
+            );
+
+        }
+    );
+
+
+    /*
+       Extra weighting for highly specific
+       career answers.
+    */
+
+    const specialWeights = {
+
+        "cybersecurity": "Cybersecurity Specialist",
+
+        "cloud": "Cloud Engineer",
+
+        "ai": "AI / Machine Learning Engineer",
+
+        "design": "UI/UX Designer",
+
+        "nurse": "Nurse",
+
+        "pharmacy": "Pharmacist",
+
+        "physiotherapy": "Physiotherapist",
+
+        "medical": "Doctor / Medical Professional",
+
+        "teacher": "Teacher / Educator",
+
+        "business": "Business Analyst"
+
+    };
+
+
+    answers.forEach(
+        function(answer){
+
+            if(specialWeights[answer]){
+
+                scores[
+                    specialWeights[answer]
+                ] += 2;
 
             }
-        );
+
+        }
+    );
 
 
-    const maxPossible =
-        questions.length;
+    let bestCareer = "";
 
-    const rawScore =
-        scores[recommendedCareer];
+    let bestScore = -1;
 
-    const percentage =
-        Math.round(
-            (
-                rawScore /
-                maxPossible
-            ) * 100
-        );
+
+    Object.keys(scores).forEach(
+        function(careerName){
+
+            if(
+                scores[careerName] > bestScore
+            ){
+
+                bestScore =
+                    scores[careerName];
+
+                bestCareer =
+                    careerName;
+
+            }
+
+        }
+    );
 
 
     const career =
-        careers[recommendedCareer];
+        careers[bestCareer];
+
+
+    const maximumPossible =
+        Math.max(questions.length,1);
+
+
+    let percentage =
+        Math.round(
+            (bestScore / maximumPossible) * 100
+        );
+
+
+    percentage =
+        Math.min(
+            Math.max(percentage,40),
+            98
+        );
 
 
     const assessment = {
 
-        career:
-            recommendedCareer,
+        career:bestCareer,
 
-        score:
-            percentage,
+        score:percentage,
 
-        description:
-            career.description,
+        description:career.description,
 
-        skills:
-            career.skills
+        skills:career.skills
+
     };
 
 
@@ -935,58 +1019,81 @@ function calculateResult() {
     );
 
 
-    document.getElementById("assessmentArea")
-        .style.display = "none";
+    showResult(assessment);
 
-
-    const result =
-        document.getElementById("result");
-
-    result.style.display = "block";
-
-
-    result.innerHTML = `
-
-        <h2>
-            Your Recommended Career
-        </h2>
-
-        <div class="score">
-            ${recommendedCareer}
-            <br>
-            ${percentage}% Match
-        </div>
-
-        <div class="description">
-            ${career.description}
-        </div>
-
-        <div class="skills">
-
-            ${career.skills.map(
-                function(skill) {
-                    return `
-                        <span class="skill">
-                            ${skill}
-                        </span>
-                    `;
-                }
-            ).join("")}
-
-        </div>
-
-        <a href="recommendations.html">
-            View Recommendation
-        </a>
-
-        <a
-            href="dashboard.html"
-            class="home-link">
-            Dashboard
-        </a>
-    `;
 }
 
+
+/* =========================
+   RESULT
+========================= */
+
+function showResult(assessment){
+
+    const area =
+        document.getElementById("assessmentArea");
+
+
+    area.innerHTML = `
+
+        <div class="question-card result">
+
+            <h2>
+                ${assessment.career}
+            </h2>
+
+            <div class="score">
+                Match Score:
+                <strong>
+                    ${assessment.score}%
+                </strong>
+            </div>
+
+            <p class="description">
+                ${assessment.description}
+            </p>
+
+            <h3 style="margin-bottom:15px;">
+                Recommended Skills
+            </h3>
+
+            <div class="skills">
+
+                ${assessment.skills.map(
+                    function(skill){
+
+                        return `
+
+                            <span class="skill">
+                                ${skill}
+                            </span>
+
+                        `;
+
+                    }
+                ).join("")}
+
+            </div>
+
+
+            <a
+                href="recommendations.html"
+                class="dashboard-btn">
+
+                View Career Recommendation
+
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   START
+========================= */
 
 showQuestion();
 
