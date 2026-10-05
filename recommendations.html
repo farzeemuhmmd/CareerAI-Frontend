@@ -1,259 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recommendations | CareerAI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Recommendations - CareerAI</title>
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <style>
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
 
-body{
-    font-family:Arial,sans-serif;
-    background:
-        radial-gradient(circle at top right,#12345a,transparent 40%),
-        #07111f;
-    color:#fff;
-    min-height:100vh;
-}
+        body{
+            font-family:Arial,sans-serif;
+            background:#07111f;
+            color:white;
+            min-height:100vh;
+        }
 
-.navbar{
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(7,17,31,.8);
-}
+        .navbar{
+            padding:20px 7%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:#0b1728;
+            border-bottom:1px solid #1d3048;
+        }
 
-.logo{
-    font-size:25px;
-    font-weight:800;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    background-clip:text;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+            color:#38bdf8;
+        }
 
-.back{
-    color:#6ee7ff;
-    text-decoration:none;
-}
+        .back{
+            color:white;
+            text-decoration:none;
+            padding:10px 18px;
+            border:1px solid #334b66;
+            border-radius:8px;
+        }
 
-.container{
-    width:92%;
-    max-width:1050px;
-    margin:40px auto;
-}
+        .container{
+            width:90%;
+            max-width:900px;
+            margin:50px auto;
+        }
 
-.header{
-    margin-bottom:28px;
-}
+        .hero{
+            text-align:center;
+            margin-bottom:35px;
+        }
 
-.header h1{
-    font-size:34px;
-    margin-bottom:8px;
-}
+        .hero h1{
+            font-size:38px;
+            margin-bottom:10px;
+        }
 
-.header p{
-    color:#9fb0c3;
-    line-height:1.6;
-}
+        .hero p{
+            color:#a9b8ca;
+        }
 
-.main-card{
-    background:rgba(15,30,50,.92);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:30px;
-    margin-bottom:25px;
-}
+        .card{
+            background:#0d1b2e;
+            border:1px solid #203650;
+            border-radius:18px;
+            padding:30px;
+            margin-bottom:25px;
+            box-shadow:0 15px 40px rgba(0,0,0,.25);
+        }
 
-.main-card h2{
-    color:#9fb0c3;
-    font-size:15px;
-    margin-bottom:12px;
-}
+        .career-name{
+            font-size:30px;
+            color:#38bdf8;
+            margin-bottom:18px;
+        }
 
-.career{
-    font-size:32px;
-    font-weight:800;
-    color:#6ee7ff;
-    margin-bottom:14px;
-}
+        .score{
+            font-size:20px;
+            margin-bottom:15px;
+        }
 
-.description{
-    color:#b7c7d8;
-    line-height:1.7;
-}
+        .bar{
+            width:100%;
+            height:12px;
+            background:#1d3048;
+            border-radius:20px;
+            overflow:hidden;
+            margin-bottom:25px;
+        }
 
-.score-box{
-    margin-top:24px;
-    display:flex;
-    align-items:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
+        .progress{
+            height:100%;
+            background:#38bdf8;
+            width:0;
+            transition:1s ease;
+        }
 
-.score{
-    font-size:25px;
-    font-weight:800;
-    color:#38ef7d;
-}
+        .section-title{
+            font-size:20px;
+            margin-bottom:12px;
+            color:#e5f3ff;
+        }
 
-.progress{
-    flex:1;
-    min-width:200px;
-    height:10px;
-    background:#16283c;
-    border-radius:20px;
-    overflow:hidden;
-}
+        .description{
+            color:#b9c8d9;
+            line-height:1.7;
+            margin-bottom:25px;
+        }
 
-.progress-bar{
-    height:100%;
-    width:0;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    transition:1s;
-}
+        .skills{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
 
-.section-title{
-    margin-bottom:16px;
-    font-size:22px;
-}
+        .skill{
+            background:#142943;
+            border:1px solid #294665;
+            padding:9px 14px;
+            border-radius:20px;
+            color:#d9efff;
+        }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
+        .actions{
+            display:flex;
+            gap:15px;
+            flex-wrap:wrap;
+            margin-top:30px;
+        }
 
-.card{
-    background:rgba(15,30,50,.88);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:24px;
-}
+        .btn{
+            text-decoration:none;
+            padding:13px 20px;
+            border-radius:9px;
+            font-weight:bold;
+        }
 
-.card h3{
-    margin-bottom:12px;
-    font-size:20px;
-}
+        .primary{
+            background:#38bdf8;
+            color:#06111d;
+        }
 
-.card p{
-    color:#aebfd0;
-    line-height:1.65;
-}
+        .secondary{
+            border:1px solid #38526d;
+            color:white;
+        }
 
-.skills{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:15px;
-}
+        .empty{
+            text-align:center;
+            padding:50px 20px;
+        }
 
-.skill{
-    padding:8px 12px;
-    border-radius:20px;
-    background:rgba(110,231,255,.08);
-    border:1px solid rgba(110,231,255,.2);
-    color:#bcefff;
-    font-size:13px;
-}
+        @media(max-width:600px){
 
-.empty{
-    text-align:center;
-    padding:45px 20px;
-}
+            .hero h1{
+                font-size:30px;
+            }
 
-.empty h2{
-    margin-bottom:12px;
-}
+            .career-name{
+                font-size:25px;
+            }
 
-.empty p{
-    color:#9fb0c3;
-    line-height:1.6;
-    margin-bottom:20px;
-}
-
-.button{
-    display:inline-block;
-    padding:13px 20px;
-    border-radius:10px;
-    background:linear-gradient(90deg,#6ee7ff,#38ef7d);
-    color:#06101b;
-    text-decoration:none;
-    font-weight:800;
-}
-
-@media(max-width:700px){
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .header h1{
-        font-size:28px;
-    }
-
-    .career{
-        font-size:27px;
-    }
-
-    .main-card{
-        padding:22px;
-    }
-}
-</style>
+            .card{
+                padding:22px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar">
     <div class="logo">CareerAI</div>
-    <a class="back" href="dashboard.html">Dashboard</a>
+    <a href="dashboard.html" class="back">Dashboard</a>
 </nav>
 
-<main class="container">
+<div class="container">
 
-    <div class="header">
-        <h1>Career Recommendations</h1>
-        <p>
-            Explore the career recommendation generated
-            from your assessment results.
-        </p>
+    <div class="hero">
+        <h1>Your Career Recommendation</h1>
+        <p>Based on your interests, skills and assessment responses</p>
     </div>
 
-    <div id="content"></div>
+    <div id="result"></div>
 
-</main>
+</div>
 
 <script>
 
 const assessmentData =
     localStorage.getItem("careerAIAssessment");
 
-const content =
-    document.getElementById("content");
+const resultContainer =
+    document.getElementById("result");
 
 if(!assessmentData){
 
-    content.innerHTML = `
-        <div class="main-card empty">
-
-            <h2>Assessment Not Completed</h2>
-
-            <p>
-                Complete the career assessment first
-                to receive your personalized recommendation.
+    resultContainer.innerHTML = `
+        <div class="card empty">
+            <h2>No Assessment Found</h2>
+            <p style="margin-top:15px;color:#a9b8ca;">
+                Complete the career assessment first.
             </p>
 
-            <a class="button" href="assessment.html">
-                Take Assessment
-            </a>
-
+            <div class="actions" style="justify-content:center;">
+                <a href="assessment.html" class="btn primary">
+                    Take Assessment
+                </a>
+            </div>
         </div>
     `;
 
@@ -262,163 +218,101 @@ if(!assessmentData){
     const assessment =
         JSON.parse(assessmentData);
 
-    const career =
-        assessment.career ||
-        "Software Developer";
-
-    const score =
-        assessment.score || 0;
-
+    const career = assessment.career || "Career Recommendation";
+    const score = Number(assessment.score || 0);
     const description =
         assessment.description ||
-        "Explore this career path based on your assessment results.";
-
-    const careerData = {
-
-        "Software Developer":{
-            overview:
-                "Software developers design, build, test and maintain software applications and digital solutions.",
-            skills:[
-                "Java",
-                "Programming",
-                "Problem Solving",
-                "Web Development",
-                "Database"
-            ]
-        },
-
-        "Data Analyst":{
-            overview:
-                "Data analysts examine data, identify patterns and communicate insights that can support business and technical decisions.",
-            skills:[
-                "Python",
-                "SQL",
-                "Excel",
-                "Statistics",
-                "Data Visualization"
-            ]
-        },
-
-        "Cyber Security Specialist":{
-            overview:
-                "Cyber security specialists help protect systems, networks and information from security threats and vulnerabilities.",
-            skills:[
-                "Networking",
-                "Linux",
-                "Cyber Security",
-                "Risk Analysis",
-                "System Security"
-            ]
-        },
-
-        "UI/UX Designer":{
-            overview:
-                "UI/UX designers create digital interfaces and user experiences that are useful, accessible and visually engaging.",
-            skills:[
-                "Figma",
-                "Wireframing",
-                "Prototyping",
-                "User Research",
-                "Visual Design"
-            ]
-        }
-
-    };
-
-    const data =
-        careerData[career] ||
-        careerData["Software Developer"];
+        "A suitable career path based on your assessment.";
 
     const skills =
-        assessment.skills &&
-        assessment.skills.length
-        ? assessment.skills
-        : data.skills;
+        Array.isArray(assessment.skills)
+            ? assessment.skills
+            : [];
 
-    content.innerHTML = `
+    resultContainer.innerHTML = `
 
-        <div class="main-card">
+        <div class="card">
 
-            <h2>Your Recommended Career</h2>
-
-            <div class="career">
+            <div class="career-name">
                 ${career}
             </div>
 
-            <p class="description">
+            <div class="score">
+                Match Score: <strong>${score}%</strong>
+            </div>
+
+            <div class="bar">
+                <div
+                    class="progress"
+                    id="progress">
+                </div>
+            </div>
+
+            <div class="section-title">
+                Career Overview
+            </div>
+
+            <div class="description">
                 ${description}
-            </p>
+            </div>
 
-            <div class="score-box">
+            <div class="section-title">
+                Recommended Skills
+            </div>
 
-                <div class="score">
-                    ${score}% Match
-                </div>
+            <div class="skills">
 
-                <div class="progress">
-                    <div
-                        class="progress-bar"
-                        id="progressBar">
-                    </div>
-                </div>
+                ${
+                    skills.length
+                    ?
+                    skills.map(skill => `
+                        <span class="skill">
+                            ${skill}
+                        </span>
+                    `).join("")
+                    :
+                    `
+                        <span class="skill">
+                            Problem Solving
+                        </span>
+
+                        <span class="skill">
+                            Communication
+                        </span>
+
+                        <span class="skill">
+                            Critical Thinking
+                        </span>
+                    `
+                }
+
+            </div>
+
+            <div class="actions">
+
+                <a
+                    href="roadmap.html"
+                    class="btn primary">
+                    View Career Roadmap
+                </a>
+
+                <a
+                    href="assessment.html"
+                    class="btn secondary">
+                    Retake Assessment
+                </a>
 
             </div>
 
         </div>
-
-        <h2 class="section-title">
-            Career Overview
-        </h2>
-
-        <div class="grid">
-
-            <div class="card">
-
-                <h3>About This Career</h3>
-
-                <p>
-                    ${data.overview}
-                </p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Recommended Skills</h3>
-
-                <div class="skills" id="skills"></div>
-
-            </div>
-
-        </div>
-
     `;
-
-    const progressBar =
-        document.getElementById("progressBar");
 
     setTimeout(function(){
 
-        progressBar.style.width =
-            Math.min(score,100) + "%";
+        document.getElementById("progress").style.width =
+            Math.min(Math.max(score,0),100) + "%";
 
     },100);
-
-    const skillsContainer =
-        document.getElementById("skills");
-
-    skills.forEach(function(skill){
-
-        const span =
-            document.createElement("span");
-
-        span.className = "skill";
-        span.textContent = skill;
-
-        skillsContainer.appendChild(span);
-
-    });
-
 }
 
 </script>
